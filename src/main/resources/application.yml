@@ -1,0 +1,36 @@
+server:
+   port: 8022
+
+spring:
+   application:
+      name: messaging
+   mail:
+      default-encoding: UTF-8
+      host: smtp.gmail.com
+      port: 587
+      username: deepdream.academia@gmail.com
+      password: zbkapqowbkdahuzc
+      properties:
+         mail:
+            smtp:
+               auth: true
+               starttls:
+                  enable: true
+            debug: true
+      protocol: smtp
+      test-connection: false
+
+# Amazon Web Services
+aws:
+   region: eu-west-1
+
+
+#Application
+webapp:
+   baseUrl: https://deepdreams.tech
+   offerSelectionUrl: /subscriber/
+   defineUserPasswordUrl: /define/user/password/url
+subscriber:
+   fetchSubscriberByIdUrl: /api/subscriber/v1/id/{id}
+subscription:
+   fetchByAppAndSubscriberUrl: /api/subscription/v1/application/{applicationId}/subscriber/{subscriberId}

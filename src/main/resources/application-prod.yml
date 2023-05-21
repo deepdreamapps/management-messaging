@@ -1,0 +1,30 @@
+spring:
+   aws:
+      xray:
+         enabled: true
+
+# Database properties
+database:
+   hostname: 52.208.79.177 # terraform-20230520144110853700000001.c0fg0k3pvlnz.eu-west-1.rds.amazonaws.com
+   port: 5432
+   name: messaging
+   username: deepdreams
+   schema: management
+   initial-size: 3
+   max-size: 10
+   max-lifetime: 1000
+
+# AWS properties
+messaging:
+   queue_subscriber_created_url: https://sqs.eu-west-1.amazonaws.com/400839853556/subscriber-created-messaging
+
+# Logging
+logging:
+   logstash:
+      group-name: messaging
+      region: ${aws.region}
+   level:
+      root: INFO
+      org.springframework: ERROR
+      org.apache: ERROR
+      tech.deepdreams: INFO

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   <title th:remove="all" >User Creation Email Notification</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <link rel = "stylesheet" href = "../css/mail.css" >
+</head>
+<body>
+<p>
+    Bonjour <span th:text="${firstName}" ></span>,
+</p>
+<p>
+   Votre compte utilisateur vient à l'instant d'être créé avec comme login (ou nom d'utilisateur)
+   votre adresse e-mail <span th:text="${emailAddress}" > </span>. 
+   <span th:if="${admin}" > Vous disposez des privilèges Administrateur, qui vous permettent de créer
+   d'autres comptes utilisateurs et d'assigner des permissions à d'autres utilisateurs</span>.  
+</p>
+<p>
+   Pour activer votre compte utilisateur, veuillez cliquer sur le lien ci-dessous afin de définir un mot de passe.<br/> 
+   <a th:href="${defineUserPasswordUrl}" ><span th:text="${defineUserPasswordUrl}" ></span></a><br/>
+   Pour être valide, votre mot de passe doit contenir au moins huit (08) caractères et inclure des lettres majuscules, 
+   minuscules, des chiffres et des caractères spéciaux.
+</p>            
+<p>
+   Cordialement, <br/> 
+   <em>L'équipe Deep Dream</em>
+</p>
+<hr>
+<p>
+    Hello <span th:text="${firstName}" ></span>,
+</p>
+<p>
+   Your user account has just been created with the login (or username) your email address <span th:text="${emailAddress}" > </span>. 
+   <span th:if="${admin}" > You have administrator privileges, which allow you to create other user accounts and assign 
+   permissions to other users.</span>  
+</p>
+<p>
+   To activate your user account, please click on the link below to define a password. <br/>
+   <a th:href="${defineUserPasswordUrl}" ><span th:text="${defineUserPasswordUrl}" ></span></a><br/>
+   To be valid, your password must contain at least eight (08) characters and include capital letters,
+   tiny, figures and special characters.
+</p>             
+<p>
+   Regards, <br/> 
+   <em>The Deep Dream Team</em>
+</p>
+
+</body>
+</html>

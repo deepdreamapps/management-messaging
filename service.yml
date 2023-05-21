@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+   name: messaging-service
+   namespace: deepdreams
+   labels:
+      app: messaging
+spec:
+   selector:
+      app: messaging
+   ports:
+   -  name: messaging
+      protocol: TCP
+      port: 8022
+      targetPort: 8022
+   type: ClusterIP

@@ -1,0 +1,23 @@
+# AWS properties
+messaging:
+   queueSubscriberCreatedUrl: ddd
+
+# Database properties
+database:
+   url: jdbc:postgresql://localhost:5432/messaging
+   secret: dev/Subscriber/PostgreSQL
+   schema: management
+   initial-size: 3
+   max-size: 10
+   max-lifetime: 1000
+
+
+# Logging
+logging:
+   file:
+      name: ${spring.application.name}.log
+   level:
+      root: INFO
+      org.springframework: ERROR
+      tech.deepdreams: INFO
+      org.apache: ERROR

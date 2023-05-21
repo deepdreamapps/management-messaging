@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   <title th:remove="all" >Subscription Creation Email Notification</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p>
+    Bonjour <span th:text="${firstName}" ></span>,
+</p>
+<p>
+   C'est avec un réel plaisir que  nous vous confirmons la souscription à l'offre d'abonnement 
+   <span style="font-weight:bold;" th:text="${offerLabel}" ></span> avec l'application 
+   <span style="font-weight:bold;" th:text="${applicationLabel}" ></span> 
+   pour une période de <span style="font-weight:bold;" th:text="${numberOfYears}" ></span> année(s). <br/> 
+   La période d'essai de votre souscription à cette offre commence dès maintenant et arrivera à expiration
+   le <span style="font-weight:bold;" th:text="${expirationDate}" ></span>.
+</p>
+<div>
+   <span>Ci-dessous, les conditions de votre contrat d'abonnement :</span><br/> 
+   <ul>
+        <li>Nombre d'utilisateur(s) : <span th:text="${numberOfUsers}" ></span></li>
+        <li>Nombre d'unité(s) : <span th:text="${numberOfUnits}" ></span></li>
+        <li>Nombre de requête(s) : <span th:text="${numberOfRequests}" ></span></li>
+        <li>Durée de la période d'essai : <span th:text="${trialDuration}" ></span> jour(s)</li>
+    </ul>
+</div>      
+<p>
+   Cordialement, <br/> 
+   <em>L'équipe Deep Dream</em>
+</p>
+
+<hr>
+
+<p>
+    Hello <span th:text="${firstName}" ></span>,
+</p>
+<p>
+   It is with real pleasure that we confirm the subscription to the <span style="font-weight:bold;" th:text="${offerLabel}" ></span>
+   subscription offer the <span style="font-weight:bold;" th:text="${applicationLabel}" ></span> application for a period of 
+   <span style="font-weight:bold;" th:text="${numberOfYears}" ></span> year(s). <br/> 
+   The trial period for your subscription to this offer begins now and will expire on
+   <span style="font-weight:bold;" th:text="${expirationDate}" ></span>.
+</p>
+<div>
+   <span>Find below, the your subscription terms :</span><br/> 
+   <ul>
+        <li>Number of users : <span th:text="${numberOfUsers}" ></span></li>
+        <li>Number of units : <span th:text="${numberOfUnits}" ></span></li>
+        <li>Number of requests : <span th:text="${numberOfRequests}" ></span></li>
+        <li>Duration of the trial period : <span th:text="${trialDuration}" ></span> days</li>
+    </ul>
+</div>       
+<p>
+   Regards, <br/> 
+   <em>The Deep Dream Team</em>
+</p>
+</body>
+</html>

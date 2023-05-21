@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   <title th:remove="all" >Subscriber Creation Email Notification</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p>
+    Bonjour <span th:text="${firstName}" ></span>,
+</p>
+<p>
+   Nous vous remercions d' avoir rejoint notre écosystème. C'est un immense plaisir 
+   de vous compter parmi nos abonnés. <br/> 
+</p>
+<p>
+   Afin de poursuivre votre inscription, vous devez cliquer sur le lien ci-dessous afin
+   de sélectionner votre offre d'abonnement.<br/> 
+   <a th:href="${offerSelectionLink}" ><span th:text="${offerSelectionLink}" ></span></a>
+</p>        
+<p>
+   Il est important de noter qu'à compter de la date de votre première souscription, vous 
+   bénéficiez d'une période d'essai qui s'étend sur plusieurs mois. Aucun paiement ne vous
+   sera exigé avant le terme de cette période d'essai.
+</p> 
+
+<p>
+   Cordialement, <br/> 
+   <em>L'équipe Deep Dream</em>
+</p>
+
+<hr>
+
+<p>
+    Hello <span th:text="${firstName}" ></span>,
+</p>
+<p>
+   Thank you for joining our ecosystem. It is a great pleasure to count you among our 
+   subscribers.<br/> 
+</p>  
+<p>
+   In order to continue your registration, you must click on the link below to select 
+   your subscription offer.<br/> 
+   <a th:href="${offerSelectionLink}" ><span th:text="${offerSelectionLink}" ></span></a>
+</p>   
+<p>
+   It is important to note that from the date of your first subscription, you benefit from 
+   a trial period which extends over several months. No payment will be required from you 
+   before the end of this trial period.
+</p> 
+         
+<p>
+   Regards, <br/> 
+   <em>The Deep Dream Team</em>
+</p>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
+	<servers>
+		<server>
+			<id>deepdreams-maven-repo</id>
+			<username>aws</username>
+			<password></password>
+		</server>
+		<server>
+			<id>docker.io</id>
+			<username>deepdreamapps</username>
+			<password></password>
+		</server>
+	</servers>
+	<mirrors>
+		<mirror>
+			<id>central</id>
+			<url>https://repo1.maven.org/maven2/</url>
+			<mirrorOf>central</mirrorOf>
+		</mirror>
+		<mirror>
+			<id>deepdreams-maven-repo</id>
+			<name>deepdreams-maven-repo</name>
+			<url>https://deepdreams-400839853556.d.codeartifact.eu-west-1.amazonaws.com/maven/maven-repo/</url>
+			<mirrorOf>*</mirrorOf>
+		</mirror>
+	</mirrors>
+	<profiles>
+		<profile>
+			<id>deepdreams-maven-repo</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<repositories>
+				<repository>
+					<id>deepdreams-maven-repo</id>
+					<url>https://deepdreams-400839853556.d.codeartifact.eu-west-1.amazonaws.com/maven/maven-repo/</url>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
+</settings>

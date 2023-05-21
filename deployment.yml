@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: messaging-deployment
+   namespace: deepdreams
+   labels:
+      app: messaging
+spec:
+   replicas: 1
+   selector:
+      matchLabels:
+         app: messaging
+   template:
+      metadata:
+         labels:
+            app: messaging
+      spec:
+         containers:
+         -  name: messaging
+            image: 400839853556.dkr.ecr.eu-west-1.amazonaws.com/messaging:latest
+            ports:
+            -  name: http
+               containerPort: 8022
+            imagePullPolicy: Always
+            livenessProbe:
+               httpGet:
+                  path: /liveness
+                  port: 8022
+               initialDelaySeconds: 30
+               periodSeconds: 30
+            readinessProbe:
+               httpGet:
+                  path: /readiness
+                  port: 8022
+               initialDelaySeconds: 30
+               periodSeconds: 30
+            resources:
+               requests:
+                  cpu: 250m
+                  memory: 256Mi
+               limits:
+                  cpu: 750m
+                  memory: 1024Mi
+            env:
+            -  name: db_username
+               valueFrom:
+                  secretKeyRef:
+                     name: messaging-secret
+                     key: username
+            -  name: db_password
+               valueFrom:
+                  secretKeyRef:
+                     name: messaging-secret
+                     key: password
