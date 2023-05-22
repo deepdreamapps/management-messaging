@@ -28,5 +28,5 @@ phases:
       - echo 'Pushing image to ECR'
       - docker push $IMAGE_REPO_URL:$PROJECT_VERSION
       - docker push $IMAGE_REPO_URL:latest
-      - echo 'Writing image definitions file...'
+      - echo 'Writing image definitions file.'
       - printf '[{"name":$PROJECT_NAME, "imageUri":"%s"}]' $IMAGE_REPO_URL:$PROJECT_VERSION > imagedefinitions.json
