@@ -2,7 +2,7 @@ version: 0.2
 phases:
    install:
       runtime-versions:
-         java: corretto11
+         java: corretto17
    pre_build:
       commands:
       - IMAGE_REPO_URL='400839853556.dkr.ecr.eu-west-1.amazonaws.com/messaging'
