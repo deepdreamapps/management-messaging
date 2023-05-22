@@ -5,7 +5,7 @@ spring:
 
 # Database properties
 database:
-   hostname: 52.208.79.177 # terraform-20230520144110853700000001.c0fg0k3pvlnz.eu-west-1.rds.amazonaws.com
+   hostname: terraform-20230520144110853700000001.c0fg0k3pvlnz.eu-west-1.rds.amazonaws.com
    port: 5432
    name: messaging
    username: deepdreams
