@@ -11,7 +11,7 @@ info:
    version: 0.0.1-SNAPSHOT
 
 servers:
--  url: https://services.deepdreams.tech
+-  url: http://services.deepdreams.tech
 
 paths:
 
