@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import com.amazonaws.services.secretsmanager.AWSSecretsManager;
@@ -19,41 +20,35 @@ import com.zaxxer.hikari.HikariDataSource;
 public class DataSourceConfig {
 	@Value("${database.url}")
     private String url ;
+	
+	@Value("${database.schema}")
+	private String schema ;
+	
+	@Value("${database.initial-size}")
+	private Integer initialSize ;
+	
+	@Value("${database.max-size}")
+	private Integer maxSize ;
+	
+	@Value("${database.max-lifetime}")
+	private Long maxLifetime ;
 
-    @Value("${database.secret}")
-    private String secretName ;
-    
-    @Autowired
-	private AWSSecretsManager secretsManager ;
+	@Autowired
+	private Environment env ;
 
 
     @Bean
     public DataSource dataSource() {
-    	GetSecretValueRequest request = new GetSecretValueRequest()
-	            .withSecretId(secretName) ;
-	        
-		GetSecretValueResult result = secretsManager.getSecretValue(request);
-	       
-		String secretValue = result.getSecretString();
-
-	    // Parse the secret value as a JsonNode
-	    ObjectMapper objectMapper = new ObjectMapper();
-	    JsonNode secretNode = null ;
-	    
-		try {
-			secretNode = objectMapper.readTree(secretValue);
-		} catch (JsonProcessingException ex) {
-			throw new RuntimeException("Bad secrets found !", ex) ;
-		}
-
-	    // Access the values by field name
-	    String username = secretNode.get("username").asText();
-	    String password = secretNode.get("password").asText();
+    	String userName = env.getProperty("db_username") ;
+		String password = env.getProperty("db_password") ;
 	    
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setJdbcUrl(url);
-        dataSource.setUsername(username);
+        dataSource.setUsername(userName);
         dataSource.setPassword(password);
+        dataSource.setSchema(schema) ;
+        dataSource.setMaximumPoolSize(maxSize);
+        dataSource.setMaxLifetime(maxLifetime);
         return dataSource;
     }
     
