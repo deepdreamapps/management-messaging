@@ -1,7 +1,7 @@
 # Database properties
 spring:
    datasource:
-      url: jdbc:postgresql://terraform-20230523104252789600000001.c0fg0k3pvlnz.eu-west-1.rds.amazonaws.com:5432/${spring.application.name}
+      url: jdbc:postgresql://54.74.248.146:5432/${spring.application.name}
       username: ${db_username}
       password: ${db_password}
       driver-class-name: org.postgresql.Driver
