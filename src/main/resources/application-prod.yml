@@ -24,7 +24,7 @@ messaging:
 # Logging
 logging:
    logstash:
-      group-name: deepdreams-${spring.application.name}
+      group-name: deepdreams/${spring.application.name}
       region: ${aws.region}
    level:
       root: INFO
