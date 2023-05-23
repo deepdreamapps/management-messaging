@@ -1,30 +1,25 @@
 spring:
-   aws:
-      xray:
-         enabled: true
-
-# Database properties
-database:
-   url: jdbc:postgresql://52.208.79.177:5432/${spring.application.name}
-   driver-class-name: org.postgresql.Driver
-   hostname: 52.208.79.177
-   port: 5432
-   name: ${spring.application.name}
-   username: deepdreams
-   schema: management
-   dialect: org.hibernate.dialect.PostgreSQLDialect
-   initial-size: 1
-   max-size: 3
-   max-lifetime: 1800000
-
+   datasource:
+      url: jdbc:postgresql://52.208.79.177:5432/${spring.application.name}
+      username: ${db_username}
+      password: ${db_password}
+      driver-class-name: org.postgresql.Driver
+      hikari:
+         maximum-pool-size: 5
+         connection-timeout: 30000
+         idle-timeout: 30000
+         minimum-idle: 1
+         
 # AWS properties
 messaging:
    queue_subscriber_created_url: https://sqs.eu-west-1.amazonaws.com/400839853556/subscriber-created-messaging
-
 # Logging
+
+
 logging:
    logstash:
       group-name: deepdreams/${spring.application.name}
+
       region: ${aws.region}
    level:
       root: INFO

@@ -1,16 +1,15 @@
 # Database properties
-database:
-   url: jdbc:postgresql://localhost:5432/${spring.application.name}
-   driver-class-name: org.postgresql.Driver
-   hostname: localhost
-   port: 5432
-   name: ${spring.application.name}
-   username: deepdreams
-   schema: management
-   dialect: org.hibernate.dialect.PostgreSQLDialect
-   initial-size: 1
-   max-size: 3
-   max-lifetime: 1800000
+spring:
+   datasource:
+      url: jdbc:postgresql://localhost:5432/${spring.application.name}
+      username: ${db_username}
+      password: ${db_password}
+      driver-class-name: org.postgresql.Driver
+      hikari:
+         maximum-pool-size: 5
+         connection-timeout: 30000
+         idle-timeout: 30000
+         minimum-idle: 1
 
 # AWS properties
 messaging:

@@ -431,3 +431,28 @@ Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'me
 2023-05-23T04:43:31.856-04:00  INFO 24432 --- [restartedMain] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
 2023-05-23T04:43:32.038-04:00  INFO 24432 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
 2023-05-23T04:43:32.607-04:00  INFO 24432 --- [restartedMain] t.d.m.ManagementMessagingApplication     : Started ManagementMessagingApplication in 1.65 seconds (process running for 872.422)
+2023-05-23T04:49:07.121-04:00  INFO 24432 --- [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2023-05-23T04:49:07.127-04:00  INFO 24432 --- [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2023-05-23T04:49:07.321-04:00  INFO 24432 --- [restartedMain] t.d.m.ManagementMessagingApplication     : Starting ManagementMessagingApplication using Java 17.0.6 with PID 24432 (C:\DEV\DEEP_DREAMS\MANAGEMENT\java\management-messaging\target\classes started by Dell in C:\DEV\DEEP_DREAMS\MANAGEMENT\java\management-messaging)
+2023-05-23T04:49:07.321-04:00  INFO 24432 --- [restartedMain] t.d.m.ManagementMessagingApplication     : The following 1 profile is active: "dev"
+2023-05-23T04:49:08.047-04:00  INFO 24432 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-23T04:49:08.104-04:00  INFO 24432 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2023-05-23T04:49:08.196-04:00  INFO 24432 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@3a269ba4
+2023-05-23T04:49:08.197-04:00  INFO 24432 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2023-05-23T04:49:08.212-04:00  INFO 24432 --- [restartedMain] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-05-23T04:49:08.360-04:00  INFO 24432 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-23T04:49:08.875-04:00  INFO 24432 --- [restartedMain] t.d.m.ManagementMessagingApplication     : Started ManagementMessagingApplication in 1.624 seconds (process running for 1208.691)
+2023-05-23T04:49:13.691-04:00  INFO 24432 --- [RMI TCP Connection(23)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2023-05-23T04:49:13.697-04:00  INFO 24432 --- [RMI TCP Connection(23)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2023-05-23T05:09:04.045-04:00  INFO 18740 --- [restartedMain] t.d.m.ManagementMessagingApplication     : Starting ManagementMessagingApplication using Java 17.0.6 with PID 18740 (C:\DEV\DEEP_DREAMS\MANAGEMENT\java\management-messaging\target\classes started by Dell in C:\DEV\DEEP_DREAMS\MANAGEMENT\java\management-messaging)
+2023-05-23T05:09:04.050-04:00  INFO 18740 --- [restartedMain] t.d.m.ManagementMessagingApplication     : The following 1 profile is active: "dev"
+2023-05-23T05:09:05.916-04:00  INFO 18740 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-05-23T05:09:06.114-04:00  INFO 18740 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2f2e398e
+2023-05-23T05:09:06.116-04:00  INFO 18740 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-05-23T05:09:06.172-04:00  INFO 18740 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-23T05:09:06.235-04:00  INFO 18740 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-05-23T05:09:06.671-04:00  INFO 18740 --- [restartedMain] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-05-23T05:09:07.506-04:00  INFO 18740 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-23T05:09:09.034-04:00  INFO 18740 --- [restartedMain] t.d.m.ManagementMessagingApplication     : Started ManagementMessagingApplication in 5.531 seconds (process running for 6.945)
+2023-05-23T05:09:15.170-04:00  INFO 18740 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-05-23T05:09:15.177-04:00  INFO 18740 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
