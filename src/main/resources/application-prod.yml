@@ -7,7 +7,7 @@ spring:
 database:
    hostname: terraform-20230520144110853700000001.c0fg0k3pvlnz.eu-west-1.rds.amazonaws.com
    port: 5432
-   name: messaging
+   name: ${spring.application.name}
    username: deepdreams
    schema: management
    initial-size: 3
@@ -21,7 +21,7 @@ messaging:
 # Logging
 logging:
    logstash:
-      group-name: messaging
+      group-name: deepdreams/${spring.application.name}
       region: ${aws.region}
    level:
       root: INFO

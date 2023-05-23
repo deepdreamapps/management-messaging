@@ -4,8 +4,10 @@ messaging:
 
 # Database properties
 database:
-   url: jdbc:postgresql://localhost:5432/messaging
-   secret: dev/Subscriber/PostgreSQL
+   hostname: localhost
+   url: jdbc:postgresql://localhost:5432/${spring.application.name}
+   username: deepdreams
+   secret: postgres-credentials-dev
    schema: management
    initial-size: 3
    max-size: 10
