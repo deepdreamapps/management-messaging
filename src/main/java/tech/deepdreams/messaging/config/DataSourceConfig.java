@@ -21,6 +21,9 @@ public class DataSourceConfig {
 	@Value("${database.schema}")
 	private String schema ;
 	
+	@Value("${database.dialect}")
+	private String dialect ;
+	
 	@Value("${database.initial-size}")
 	private Integer initialSize ;
 	
@@ -58,6 +61,7 @@ public class DataSourceConfig {
 
         Properties jpaProperties = new Properties();
         jpaProperties.put("hibernate.show_sql", false);
+        jpaProperties.setProperty("hibernate.dialect", dialect) ;
 
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource);
