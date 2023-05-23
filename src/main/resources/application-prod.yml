@@ -12,7 +12,7 @@ database:
    name: ${spring.application.name}
    username: deepdreams
    schema: management
-   dialect: org.hibernate.dialect.PostgreSQL13Dialect
+   dialect: org.hibernate.dialect.PostgreSQLDialect
    initial-size: 3
    max-size: 10
    max-lifetime: 1000
