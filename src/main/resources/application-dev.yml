@@ -1,18 +1,20 @@
-# AWS properties
-messaging:
-   queueSubscriberCreatedUrl: ddd
-
 # Database properties
 database:
-   hostname: localhost
    url: jdbc:postgresql://localhost:5432/${spring.application.name}
+   driver-class-name: org.postgresql.Driver
+   hostname: localhost
+   port: 5432
+   name: ${spring.application.name}
    username: deepdreams
-   secret: postgres-credentials-dev
    schema: management
-   initial-size: 3
-   max-size: 10
-   max-lifetime: 1000
+   dialect: org.hibernate.dialect.PostgreSQLDialect
+   initial-size: 1
+   max-size: 3
+   max-lifetime: 1800000
 
+# AWS properties
+messaging:
+   queue_subscriber_created_url: https://sqs.eu-west-1.amazonaws.com/400839853556/subscriber-created-messaging
 
 # Logging
 logging:

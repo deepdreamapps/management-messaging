@@ -5,16 +5,16 @@ spring:
 
 # Database properties
 database:
-   url: jdbc:postgresql://52.208.79.177:5432/messaging
+   url: jdbc:postgresql://52.208.79.177:5432/${spring.application.name}
    driver-class-name: org.postgresql.Driver
    hostname: 52.208.79.177
    port: 5432
-   name: messaging
+   name: ${spring.application.name}
    username: deepdreams
    schema: management
    dialect: org.hibernate.dialect.PostgreSQLDialect
-   initial-size: 3
-   max-size: 10
+   initial-size: 1
+   max-size: 3
    max-lifetime: 1800000
 
 # AWS properties
@@ -24,7 +24,7 @@ messaging:
 # Logging
 logging:
    logstash:
-      group-name: deepdreams/${spring.application.name}
+      group-name: deepdreams-${spring.application.name}
       region: ${aws.region}
    level:
       root: INFO
