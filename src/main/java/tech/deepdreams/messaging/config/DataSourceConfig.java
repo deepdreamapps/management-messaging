@@ -15,6 +15,9 @@ public class DataSourceConfig {
 	@Value("${database.url}")
     private String url ;
 	
+	@Value("${database.driver-class-name}")
+	private String driverClassName ;
+	
 	@Value("${database.schema}")
 	private String schema ;
 	
@@ -38,6 +41,7 @@ public class DataSourceConfig {
 	    
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setJdbcUrl(url);
+        dataSource.setDriverClassName(driverClassName);
         dataSource.setUsername(userName);
         dataSource.setPassword(password);
         dataSource.setSchema(schema) ;
