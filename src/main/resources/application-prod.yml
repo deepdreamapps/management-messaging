@@ -1,5 +1,6 @@
 # Database properties
 database:
+   driver-class-name: org.postgresql.Driver
    url: jdbc:postgresql://54.74.248.146:5432/${spring.application.name}?sslmode=require&ssl=true
    hostname: 54.74.248.146
    port: 5432
