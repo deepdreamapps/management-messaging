@@ -3,19 +3,21 @@ import com.amazonaws.services.secretsmanager.AWSSecretsManager;
 import com.amazonaws.services.secretsmanager.model.GetSecretValueRequest;
 import com.amazonaws.services.secretsmanager.model.GetSecretValueResult;
 import com.zaxxer.hikari.HikariDataSource;
-import jakarta.persistence.EntityManagerFactory;
+import java.util.Properties;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Profile({"dev", "int", "prod"})
 @Configuration
+@EnableTransactionManagement
 public class DataSourceConfig {
 	@Value("${database.driver-class-name}")
 	private String driverClassName ;
@@ -77,18 +79,20 @@ public class DataSourceConfig {
 	
 	
 	@Bean
-    public EntityManagerFactory entityManagerFactory(DataSource dataSource) {
-        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource);
-        em.setPackagesToScan("tech.deepdreams.messaging");
-        em.afterPropertiesSet();
-        return em.getObject();
-    }
-    
-    @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory);
-        return transactionManager;
-    }
+	   public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+	      LocalContainerEntityManagerFactoryBean em 
+	        = new LocalContainerEntityManagerFactoryBean();
+	      em.setDataSource(dataSource());
+	      em.setPackagesToScan(new String[] { "tech.deepdreams.messaging" });
+	      
+	      Properties properties = new Properties();
+	      properties.setProperty("hibernate.hbm2ddl.auto", "none");
+	      properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+
+	      JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+	      em.setJpaVendorAdapter(vendorAdapter);
+	      em.setJpaProperties(properties);
+
+	      return em;
+	   }
 }
