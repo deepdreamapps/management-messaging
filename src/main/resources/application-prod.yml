@@ -1,12 +1,10 @@
-aws:
-   secretsmanager:
-      name: postgre-credentials-prod
-
 spring:
+   config:
+      import: aws-secretsmanager:postgre-credentials-prod
    datasource:
       url: jdbc:postgresql://54.74.248.146:5432/${spring.application.name}?ssl=true&sslmode=require&currentSchema=management
       username: deepdreams
-      password: ${aws.secretsmanager.secret.password}
+      password: ${password}
       jpa:
          properties:
             hibernate:

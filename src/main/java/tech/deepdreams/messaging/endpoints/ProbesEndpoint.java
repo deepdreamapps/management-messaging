@@ -16,6 +16,7 @@ public class ProbesEndpoint {
 		return  String.format("Alive at %s", ZonedDateTime.now()) ;
 	}
 	
+	
 	@GetMapping(path = "/api/messaging/readiness")
 	public String readinessProbe () {
 		int number = reminderEmailService.fetchUndeliveredEmails().size() ;
