@@ -79,10 +79,9 @@ public class DataSourceConfig {
 	
 	
 	@Bean
-	   public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-	      LocalContainerEntityManagerFactoryBean em 
-	        = new LocalContainerEntityManagerFactoryBean();
-	      em.setDataSource(dataSource());
+	   public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+	      LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+	      em.setDataSource(dataSource);
 	      em.setPackagesToScan(new String[] { "tech.deepdreams.messaging" });
 	      
 	      Properties properties = new Properties();
