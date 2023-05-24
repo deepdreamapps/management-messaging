@@ -1,19 +1,16 @@
-aws:
-   secretsmanager:
-      name: postgre-credentials-prod
-      
 # Database properties
-spring:
-   datasource:
-      url: jdbc:postgresql://54.74.248.146:5432/${spring.application.name}
-      username: deepdreams
-      password: ${aws.secretsmanager.secret.password}
-      driver-class-name: org.postgresql.Driver
-      hikari:
-         maximum-pool-size: 1
-         connection-timeout: 30000
-         idle-timeout: 30000
-         minimum-idle: 1
+database:
+   url: jdbc:postgresql://54.74.248.146:5432/${spring.application.name}?sslmode=require&ssl=true
+   hostname: 54.74.248.146
+   port: 5432
+   name: ${spring.application.name}
+   username: deepdreams
+   secret: postgre-credentials-prod
+   schema: management
+   initial-size: 1
+   max-size: 5
+   max-lifetime: 1800000
+         
 # Application config
 subscriber:
    topic_subscriber_created: arn:aws:sns:eu-west-1:400839853556:subscriber_created
