@@ -1,9 +1,13 @@
+aws:
+   secretsmanager:
+      name: postgre-credentials-dev
+
 # Database properties
 spring:
    datasource:
       url: jdbc:postgresql://localhost:5432/${spring.application.name}
-      username: ${db_username}
-      password: ${db_password}
+      username: postgres
+      password: ${aws.secretsmanager.secret.password}
       driver-class-name: org.postgresql.Driver
       hikari:
          maximum-pool-size: 1

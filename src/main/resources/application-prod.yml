@@ -1,10 +1,14 @@
+aws:
+   secretsmanager:
+      name: postgre-credentials-prod
+
 spring:
    datasource:
       url: jdbc:postgresql://54.74.248.146:5432/${spring.application.name}?ssl=true&sslmode=require&currentSchema=management
-      username: ${db_username}
-      password: ${db_password}
+      username: deepdreams
+      password: ${aws.secretsmanager.secret.password}
       jpa:
-         properties: 
+         properties:
             hibernate:
                dialect: org.hibernate.dialect.PostgreSQLDialect
       hikari:
