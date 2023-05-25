@@ -42,6 +42,7 @@ public class SubscriberService {
 		try {
 			return subscriberClient.fetchMessagesFromQueue() ;
 		} catch (Exception e) {
+			log.error(e.getMessage(), e);
 			return new ArrayList<>() ;
 		} 
 	}

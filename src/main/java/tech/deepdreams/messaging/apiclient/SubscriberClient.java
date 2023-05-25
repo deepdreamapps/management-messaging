@@ -44,6 +44,7 @@ public class SubscriberClient {
 			eventsList.add(event) ;
 			amazonSQSClient.deleteMessage(queueSubscriberCreatedUrl, message.getReceiptHandle()) ;
 		}
+		log.info(String.format("Number of messages retrieved from the queue %s", eventsList.size())) ;
         return eventsList ;
 	}
 	
