@@ -81,7 +81,7 @@ public class ReminderEmailService {
 							email.setSent(true) ;
 					    	reminderEmailRepository.save(email) ;
 						} catch (Exception e) {
-							log.error(String.format("Message not sent : %s", email), e) ;
+							log.error(String.format("Mail not sent : %s", email), e) ;
 						}
 				     }) ;
 	}
