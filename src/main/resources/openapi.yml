@@ -48,7 +48,7 @@ components:
                format: int64
             eventType:
                type: string
-            timestamp:
+            instant:
                type: string
                format: date-time
             subject:
