@@ -28,7 +28,7 @@ phases:
       - echo 'Pushing image to ECR'
       - docker push $IMAGE_REPO_URL:$PROJECT_VERSION
       - docker push $IMAGE_REPO_URL:latest
-      - echo 'Writing image definitions file...'
+      - echo 'Writing image definitions file'
       - printf '[{"name":"messaging", "imageUri":"400839853556.dkr.ecr.eu-west-1.amazonaws.com/messaging", "imageTag":"latest"}]'  > imagedefinitions.json
 artifacts:
   files:
