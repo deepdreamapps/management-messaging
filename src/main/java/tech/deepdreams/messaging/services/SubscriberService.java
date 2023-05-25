@@ -52,6 +52,7 @@ public class SubscriberService {
 		Map<String, Object> templateModel = new HashMap<>() ;
 		templateModel.put("firstName", payload.getFirstName()) ;
 		templateModel.put("offerSelectionUrl", String.format("%s%s", baseUrl, offerSelectionUrl)) ;
+		
 		ReminderEmailPayload reminderEmail = ReminderEmailPayload.builder()
 				.eventId(payload.getEventId())
 				.eventType(SubscriberEventType.SUBSCRIBER_CREATED.name())

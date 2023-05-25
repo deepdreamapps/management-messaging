@@ -5,23 +5,18 @@
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<p>
-    Bonjour <span th:text="${firstName}" ></span>,
-</p>
-<p>
-   Nous vous remercions d' avoir rejoint notre écosystème. C'est un immense plaisir 
-   de vous compter parmi nos abonnés. <br/> 
-</p>
-<p>
-   Afin de poursuivre votre inscription, vous devez cliquer sur le lien ci-dessous afin
-   de sélectionner votre offre d'abonnement.<br/> 
-   <a th:href="${offerSelectionLink}" ><span th:text="${offerSelectionLink}" ></span></a>
-</p>        
-<p>
-   Il est important de noter qu'à compter de la date de votre première souscription, vous 
-   bénéficiez d'une période d'essai qui s'étend sur plusieurs mois. Aucun paiement ne vous
-   sera exigé avant le terme de cette période d'essai.
-</p> 
+
+<p>Bonjour <span th:text="${firstName}" ></span>,</p>
+
+<p>Nous vous souhaitons la bienvenue à la suite de votre inscription à l'application Salari.  Notre application 
+est conçue pour simplifier et automatiser les processus liés à la gestion  des ressources humaines tout en 
+offrant une expérience fluide et efficace. <br/> </p>
+
+<p>Afin de poursuivre l'inscription, naviguez sur le lien ci-dessous afin de sélectionner une offre 
+et la durée de votre abonnement.<br/> <a th:href="${offerSelectionLink}" ><span th:text="${offerSelectionLink}" ></span></a></p>   
+     
+<p>Il est important de noter qu'à compter de la date de la souscription à un abonnement, vous  bénéficiez d'une période d'essai qui s'étend sur plusieurs mois. Aucun paiement ne vous
+sera exigé avant le terme de la période d'essai.</p> 
 
 <p>
    Cordialement, <br/> 

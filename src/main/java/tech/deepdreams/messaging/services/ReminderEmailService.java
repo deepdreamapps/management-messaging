@@ -36,7 +36,7 @@ public class ReminderEmailService {
 							amazonEmailSender.sendReminderEmail(email) ;
 							email.setSent(true) ;
 					    	reminderEmailRepository.save(email) ;
-						} catch (IOException e) {
+						} catch (Exception e) {
 							log.error(String.format("Message sent : %s", email), e) ;
 						}
 				     }) ;

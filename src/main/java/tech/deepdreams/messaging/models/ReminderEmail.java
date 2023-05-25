@@ -28,10 +28,7 @@ public class ReminderEmail {
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss ")
 	private OffsetDateTime timestamp ;
-	
-	@Column(name = "subscriber_id")
-	private Long subscriberId ;
-	
+
 	private String subject ;
 	
 	private String content ;

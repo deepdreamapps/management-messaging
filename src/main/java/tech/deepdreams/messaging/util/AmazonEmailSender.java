@@ -47,6 +47,7 @@ public class AmazonEmailSender {
    		     .timestamp(OffsetDateTime.now())
    			 .sent(false)
    		     .build() ;
+		
 		log.info(String.format("Save reminder email : %s", reminderEmail)) ;
 		
 		return reminderEmailMapper.mapModelToDTO(reminderEmailRepository.save(reminderEmail)) ;
