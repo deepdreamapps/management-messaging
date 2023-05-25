@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import tech.deepdreams.subscriber.events.SubscriberCreatedEvent;
+import tech.deepdreams.subscriber.events.deserializers.SubscriberCreatedEventDeserializer;
 import tech.deepdreams.subscriber.events.serializers.SubscriberCreatedEventSerializer;
 
 @Configuration
@@ -61,7 +62,8 @@ public class AWSConfig {
 	public ObjectMapper objectMapper() {
 		ObjectMapper mapper = new ObjectMapper();
 		SimpleModule module = new SimpleModule();
-		module.addSerializer(SubscriberCreatedEvent.class, new SubscriberCreatedEventSerializer());
+		module.addDeserializer(SubscriberCreatedEvent.class, new SubscriberCreatedEventDeserializer());
+		
 
 		mapper.registerModule(module);
 		mapper.registerModule(new JavaTimeModule());
