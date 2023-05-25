@@ -10,10 +10,7 @@ import com.amazonaws.services.simpleemail.model.SendEmailRequest;
 import com.amazonaws.services.simpleemail.model.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import tech.deepdreams.messaging.dtos.ReminderEmailDTO;
-import tech.deepdreams.messaging.mappers.ReminderEmailMapper;
 import tech.deepdreams.messaging.models.ReminderEmail;
-import tech.deepdreams.messaging.repositories.ReminderEmailRepository;
 import tech.deepdreams.messaging.requests.ReminderEmailPayload;
 
 @Log4j2
@@ -22,11 +19,9 @@ import tech.deepdreams.messaging.requests.ReminderEmailPayload;
 public class AmazonEmailSender {
 	private SpringTemplateEngine templateEngine ;
     private AmazonSimpleEmailService amazonSEService ;
-    private ReminderEmailRepository reminderEmailRepository ;
-    private ReminderEmailMapper reminderEmailMapper ;
 	 
 	
-	public ReminderEmailDTO saveReminderEmail(ReminderEmailPayload payload) throws IOException {
+	public ReminderEmail genReminderEmail(ReminderEmailPayload payload) throws IOException {
 
 		final Context context = new Context();
 		
@@ -36,20 +31,16 @@ public class AmazonEmailSender {
 		
 		final String htmlBody = templateEngine.process(payload.getTemplateFile(), context) ;
 		
-		ReminderEmail reminderEmail = ReminderEmail.builder()
-			 .eventType(payload.getEventType())
-			 .eventId(payload.getEventId())
-			 .instant(OffsetDateTime.now())
-   		     .subject(payload.getSubject())
-   		     .sender(payload.getFrom())
-   		     .recipient(payload.getTo())
-   		     .content(payload.getSubject())
-   			 .sent(false)
-   		     .build() ;
-		
-		log.info(String.format("Save reminder email : %s", reminderEmail)) ;
-		
-		return reminderEmailMapper.mapModelToDTO(reminderEmailRepository.save(reminderEmail)) ;
+		return ReminderEmail.builder()
+					.eventType(payload.getEventType())
+					.eventId(payload.getEventId())
+					.instant(OffsetDateTime.now())
+					.subject(payload.getSubject())
+					.sender(payload.getFrom())
+					.recipient(payload.getTo())
+					.content(htmlBody)
+					.sent(false)
+					.build() ;
 	}
 	
 	

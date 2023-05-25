@@ -13,11 +13,9 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Profile({"dev", "int", "prod"})
 @Configuration
-@EnableTransactionManagement
 public class DataSourceConfig {
 	@Value("${database.driver-class-name}")
 	private String driverClassName ;

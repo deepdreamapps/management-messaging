@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS management.reminder_email
 	event_type varchar(100) ,
 	event_id bigint ,
 	instant  timestamp with time zone ,
-	subject varchar(255),
+	subject text,
 	sender varchar(100) ,
 	recipient varchar(100) ,
 	content text ,

@@ -7,12 +7,14 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import lombok.extern.log4j.Log4j2;
 import tech.deepdreams.messaging.requests.SubscriberCreationPayload;
+import tech.deepdreams.messaging.services.ReminderEmailService;
 import tech.deepdreams.messaging.services.SubscriberService;
 
 @Log4j2
 @Service
 public class SubscriberEventEndpoint {
 	private SubscriberService  subscriberService ;
+	private ReminderEmailService reminderEmailService ;
 	private ExecutorService executorService ;
 	
 	
@@ -36,7 +38,7 @@ public class SubscriberEventEndpoint {
 	        		   payload.setEmailAddress(message.getEmailAddress()) ;
 	        		   log.info(String.format("Save reminder email : %s", payload)) ;
 	        		   try {
-		        		   subscriberService.saveReminderEmail(payload) ;
+	        			   reminderEmailService.saveReminderEmail(payload) ;
 		        	   } catch (Exception e) {
 		        		   log.error(String.format("Unable to save reminder email : %s", payload), e) ;
 		        	   }
