@@ -2,6 +2,8 @@ package tech.deepdreams.messaging.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -13,6 +15,12 @@ import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder;
 import com.amazonaws.services.sqs.AmazonSQSClient;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+import tech.deepdreams.subscriber.events.SubscriberCreatedEvent;
+import tech.deepdreams.subscriber.events.serializers.SubscriberCreatedEventSerializer;
 
 
 @Configuration
@@ -58,5 +66,16 @@ public class AWSConfig {
 	            .build();
 	}
 	
-
+	
+	 @Primary
+	    @Bean
+	    public ObjectMapper objectMapper() {
+	    	ObjectMapper mapper = new ObjectMapper();
+	    	SimpleModule module = new SimpleModule();
+	    	module.addSerializer(SubscriberCreatedEvent.class, new SubscriberCreatedEventSerializer());
+	    	
+	    	mapper.registerModule(module);
+	    	mapper.registerModule(new JavaTimeModule()) ;
+	    	return mapper ;
+	    }
 }
