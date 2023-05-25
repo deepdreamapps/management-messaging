@@ -40,11 +40,11 @@ public class AmazonEmailSender {
 			 .id(System.currentTimeMillis())
 			 .eventType(payload.getEventType())
 			 .eventId(payload.getEventId())
+			 .instant(OffsetDateTime.now())
    		     .subject(payload.getSubject())
    		     .sender(payload.getFrom())
    		     .recipient(payload.getTo())
    		     .content(htmlBody)
-   		     .timestamp(OffsetDateTime.now())
    			 .sent(false)
    		     .build() ;
 		

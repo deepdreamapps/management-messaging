@@ -27,7 +27,7 @@ public class ReminderEmail {
 	private String eventType ;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss ")
-	private OffsetDateTime timestamp ;
+	private OffsetDateTime instant ;
 
 	private String subject ;
 	
