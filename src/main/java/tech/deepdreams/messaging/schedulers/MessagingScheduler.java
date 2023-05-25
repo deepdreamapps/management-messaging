@@ -18,7 +18,7 @@ public class MessagingScheduler {
 		log.info(String.format("MessagingScheduler.scheduleEmails : Execution time %s", OffsetDateTime.now())) ;
 		reminderEmailService.fetchUndeliveredEmails()
 			 .forEach(reminderEmail -> {
-				 log.info(String.format("MessagingScheduler.scheduleEmails : Undelivered email found %s", reminderEmail)) ;
+				 log.info(String.format("MessagingScheduler.scheduleEmails : Undelivered Email found %s", reminderEmail)) ;
 				 reminderEmailService.sendReminderEmail(reminderEmail) ;
 				 log.info(String.format("Email sent %s", reminderEmail)) ;
 			 }) ; 
