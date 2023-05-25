@@ -1,10 +1,8 @@
 package tech.deepdreams.messaging.config;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -19,10 +17,11 @@ import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-
 import tech.deepdreams.subscriber.events.SubscriberCreatedEvent;
+import tech.deepdreams.subscriber.events.SubscriberSuspendedEvent;
 import tech.deepdreams.subscriber.events.deserializers.SubscriberCreatedEventDeserializer;
-import tech.deepdreams.subscriber.events.serializers.SubscriberCreatedEventSerializer;
+import tech.deepdreams.subscriber.events.deserializers.SubscriberSuspendedEventDeserializer;
+
 
 @Configuration
 public class AWSConfig {
@@ -63,7 +62,7 @@ public class AWSConfig {
 		ObjectMapper mapper = new ObjectMapper();
 		SimpleModule module = new SimpleModule();
 		module.addDeserializer(SubscriberCreatedEvent.class, new SubscriberCreatedEventDeserializer());
-		
+		module.addDeserializer(SubscriberSuspendedEvent.class, new SubscriberSuspendedEventDeserializer());
 
 		mapper.registerModule(module);
 		mapper.registerModule(new JavaTimeModule());
