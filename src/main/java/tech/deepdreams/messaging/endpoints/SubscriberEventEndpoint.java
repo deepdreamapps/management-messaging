@@ -33,6 +33,7 @@ public class SubscriberEventEndpoint {
 	        		   payload.setEventId(message.getId()) ;
 	        		   payload.setFirstName(message.getFirstName()) ;
 	        		   payload.setLastName(message.getLastName()) ;
+	        		   payload.setLabel(message.getLabel()) ;
 	        		   payload.setEmailAddress(message.getEmailAddress()) ;
 	        		   log.info(String.format("Save reminder email : %s", payload)) ;
 	        		   try {
