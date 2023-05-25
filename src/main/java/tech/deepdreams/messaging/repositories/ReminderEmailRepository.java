@@ -9,7 +9,7 @@ public interface ReminderEmailRepository extends CrudRepository<ReminderEmail, L
 
 	public List<ReminderEmail> findBySent (boolean sent) ;
 	
-	public List<ReminderEmail> findByTimestampBetween (OffsetDateTime startDate, OffsetDateTime endDate) ;
+	public List<ReminderEmail> findByInstantBetween (OffsetDateTime startDate, OffsetDateTime endDate) ;
 	
 	public Optional<Boolean> existsByEventTypeAndEventId (String eventType, Long eventId) ;
 }

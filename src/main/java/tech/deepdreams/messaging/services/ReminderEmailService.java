@@ -56,7 +56,7 @@ public class ReminderEmailService {
 	public List<ReminderEmailDTO> fetchEmailsBetween(LocalDate startDate, LocalDate endDate) {
 		OffsetDateTime startOffsetDateTime = OffsetDateTime.of(startDate, LocalTime.MIDNIGHT, ZoneOffset.UTC) ;
 		OffsetDateTime endOffsetDateTime = OffsetDateTime.of(endDate, LocalTime.MAX, ZoneOffset.UTC) ;
-		return reminderEmailRepository.findByTimestampBetween(startOffsetDateTime, endOffsetDateTime)
+		return reminderEmailRepository.findByInstantBetween(startOffsetDateTime, endOffsetDateTime)
 				        .stream()
 				        .map(reminderEmail -> {
 				        	return reminderEmailMapper.mapModelToDTO(reminderEmail) ;
