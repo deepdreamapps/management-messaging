@@ -43,7 +43,7 @@ public class AmazonEmailSender {
    		     .subject(payload.getSubject())
    		     .sender(payload.getFrom())
    		     .recipient(payload.getTo())
-   		     .content(htmlBody)
+   		     .content(payload.getSubject())
    			 .sent(false)
    		     .build() ;
 		
