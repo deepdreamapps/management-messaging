@@ -3,6 +3,8 @@ import java.time.OffsetDateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -18,6 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class ReminderEmail {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id ;
 	
 	@Column(name = "event_id")
