@@ -42,8 +42,8 @@ public class ReminderEmailService {
 	}
 	
 
-	public List<ReminderEmailDTO> fetchUndeliveredEmails() {
-		return reminderEmailRepository.findBySent(false)
+	public List<ReminderEmailDTO> fetchEmails(Boolean delivered) {
+		return reminderEmailRepository.findBySent(delivered)
 				        .stream()
 				        .map(reminderEmail -> {
 				        	return reminderEmailMapper.mapModelToDTO(reminderEmail) ;

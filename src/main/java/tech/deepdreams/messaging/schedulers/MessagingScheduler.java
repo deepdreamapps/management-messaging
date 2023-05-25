@@ -13,10 +13,11 @@ public class MessagingScheduler {
 	private ReminderEmailService reminderEmailService ;
 	
 	
+	
 	@Scheduled(fixedRate = 30_000) 
     public void scheduleEmails() {
 		log.info(String.format("MessagingScheduler.scheduleEmails : Execution time %s", OffsetDateTime.now())) ;
-		reminderEmailService.fetchUndeliveredEmails()
+		reminderEmailService.fetchEmails(false)
 			 .forEach(reminderEmail -> {
 				 log.info(String.format("MessagingScheduler.scheduleEmails : Undelivered Email found %s", reminderEmail)) ;
 				 reminderEmailService.sendReminderEmail(reminderEmail) ;
