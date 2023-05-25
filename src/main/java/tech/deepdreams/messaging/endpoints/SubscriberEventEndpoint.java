@@ -5,12 +5,15 @@ import java.util.concurrent.Executors;
 import javax.annotation.PreDestroy;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import tech.deepdreams.messaging.requests.SubscriberCreationPayload;
 import tech.deepdreams.messaging.services.ReminderEmailService;
 import tech.deepdreams.messaging.services.SubscriberService;
 
 @Log4j2
+@AllArgsConstructor
 @Service
 public class SubscriberEventEndpoint {
 	private SubscriberService  subscriberService ;

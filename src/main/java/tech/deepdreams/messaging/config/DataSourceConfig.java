@@ -74,6 +74,7 @@ public class DataSourceConfig {
 		return dataSource;
 	}
 
+	
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
