@@ -62,7 +62,9 @@ public class ReminderEmailService {
 		
 		log.info(String.format("Save reminder email : %s", reminderEmail)) ;
 		
-		return reminderEmailMapper.mapModelToDTO(reminderEmailRepository.save(reminderEmail)) ;
+		ReminderEmail reminderEmailSaved = reminderEmailRepository.save(reminderEmail) ;
+		
+		return reminderEmailMapper.mapModelToDTO(reminderEmailSaved) ;
 	}
 	
 	
@@ -79,7 +81,7 @@ public class ReminderEmailService {
 							email.setSent(true) ;
 					    	reminderEmailRepository.save(email) ;
 						} catch (Exception e) {
-							log.error(String.format("Message sent : %s", email), e) ;
+							log.error(String.format("Message not sent : %s", email), e) ;
 						}
 				     }) ;
 	}

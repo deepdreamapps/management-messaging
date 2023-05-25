@@ -1,4 +1,5 @@
 package tech.deepdreams.messaging.config;
+
 import com.amazonaws.services.secretsmanager.AWSSecretsManager;
 import com.amazonaws.services.secretsmanager.model.GetSecretValueRequest;
 import com.amazonaws.services.secretsmanager.model.GetSecretValueResult;
@@ -14,82 +15,79 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
-@Profile({"dev", "int", "prod"})
+@Profile({ "dev", "int", "prod" })
 @Configuration
 public class DataSourceConfig {
 	@Value("${database.driver-class-name}")
-	private String driverClassName ;
-	
+	private String driverClassName;
+
 	@Value("${database.hostname}")
-	private String hostName ;
-	
+	private String hostName;
+
 	@Value("${database.url}")
-	private String jdbcUrl ;
-	
+	private String jdbcUrl;
+
 	@Value("${database.port}")
-	private Integer port ;
-	
+	private Integer port;
+
 	@Value("${database.username}")
-	private String userName ;
-	
+	private String userName;
+
 	@Value("${database.secret}")
-	private String secretName ;
-	
+	private String secretName;
+
 	@Value("${database.name}")
-	private String databaseName ;
-	
+	private String databaseName;
+
 	@Value("${database.schema}")
-	private String schema ;
-	
+	private String schema;
+
 	@Value("${database.initial-size}")
-	private Integer initialSize ;
-	
+	private Integer initialSize;
+
 	@Value("${database.max-size}")
-	private Integer maxSize ;
-	
+	private Integer maxSize;
+
 	@Value("${database.max-lifetime}")
-	private Integer maxLifetime ;
-	
+	private Integer maxLifetime;
+
 	@Autowired
-	private AWSSecretsManager secretsManager ;
-	
-	
+	private AWSSecretsManager secretsManager;
+
 	@Bean
-    public DataSource dataSource() {
+	public DataSource dataSource() {
 
-		GetSecretValueRequest request = new GetSecretValueRequest()
-	            .withSecretId(secretName) ;
-	
-		GetSecretValueResult result = secretsManager.getSecretValue(request) ;
+		GetSecretValueRequest request = new GetSecretValueRequest().withSecretId(secretName);
 
-	    String password = result.getSecretString();
-	    
-		HikariDataSource dataSource = new HikariDataSource() ;
-		dataSource.setDriverClassName(driverClassName) ;
-		dataSource.setJdbcUrl(jdbcUrl) ;
-		dataSource.setUsername(userName) ;
-		dataSource.setPassword(password) ;
-		dataSource.setKeepaliveTime(maxLifetime) ;
+		GetSecretValueResult result = secretsManager.getSecretValue(request);
+
+		String password = result.getSecretString();
+
+		HikariDataSource dataSource = new HikariDataSource();
+		dataSource.setDriverClassName(driverClassName);
+		dataSource.setJdbcUrl(jdbcUrl);
+		dataSource.setUsername(userName);
+		dataSource.setPassword(password);
+		dataSource.setKeepaliveTime(maxLifetime);
 		dataSource.setMaximumPoolSize(maxSize);
-		dataSource.setSchema(schema) ;
-        return dataSource ;
-    }
-	
-	
+		dataSource.setSchema(schema);
+		return dataSource;
+	}
+
 	@Bean
-	   public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
-	      LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-	      em.setDataSource(dataSource);
-	      em.setPackagesToScan(new String[] { "tech.deepdreams.messaging" });
-	      
-	      Properties properties = new Properties();
-	      properties.setProperty("hibernate.hbm2ddl.auto", "none");
-	      properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+		em.setDataSource(dataSource);
+		em.setPackagesToScan(new String[] { "tech.deepdreams.messaging" });
 
-	      JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-	      em.setJpaVendorAdapter(vendorAdapter);
-	      em.setJpaProperties(properties);
+		Properties properties = new Properties();
+		properties.setProperty("hibernate.hbm2ddl.auto", "none");
+		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
 
-	      return em;
-	   }
+		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		em.setJpaVendorAdapter(vendorAdapter);
+		em.setJpaProperties(properties);
+
+		return em;
+	}
 }
