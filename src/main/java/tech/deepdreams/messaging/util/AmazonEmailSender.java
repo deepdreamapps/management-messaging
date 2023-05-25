@@ -37,7 +37,6 @@ public class AmazonEmailSender {
 		final String htmlBody = templateEngine.process(payload.getTemplateFile(), context) ;
 		
 		ReminderEmail reminderEmail = ReminderEmail.builder()
-			 .id(System.currentTimeMillis())
 			 .eventType(payload.getEventType())
 			 .eventId(payload.getEventId())
 			 .instant(OffsetDateTime.now())
