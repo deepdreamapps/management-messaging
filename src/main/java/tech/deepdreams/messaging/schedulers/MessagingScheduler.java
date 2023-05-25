@@ -16,10 +16,9 @@ public class MessagingScheduler {
 	
 	@Scheduled(fixedRate = 60_000) 
     public void scheduleEmails() {
-		log.info(String.format("Scheduled Emails : Execution time %s", LocalTime.now())) ;
 		reminderEmailService.fetchUndeliveredEmails()
 			 .forEach(reminderEmail -> {
-				 log.info(String.format("Email received %s", reminderEmail)) ;
+				 
 				 reminderEmailService.sendReminderEmail(reminderEmail) ;
 				 log.info(String.format("Email sent %s", reminderEmail)) ;
 			 }) ; 

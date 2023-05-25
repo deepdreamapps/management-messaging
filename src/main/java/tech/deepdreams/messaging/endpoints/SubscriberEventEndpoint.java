@@ -1,5 +1,6 @@
 package tech.deepdreams.messaging.endpoints;
 import java.io.IOException;
+import java.time.LocalTime;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javax.annotation.PreDestroy;
@@ -24,8 +25,10 @@ public class SubscriberEventEndpoint {
 	
 	@Scheduled(fixedDelay = 30_000)
 	public void handleEvent () {
+		log.info(String.format("SubscriberEventEndpoint : Execution time %s", LocalTime.now())) ;
 		subscriberService.fetchMessagesFromQueue()
 		           .forEach(message -> {
+		        	   log.info(String.format("Message received %s", message)) ;
 		        	   SubscriberCreationPayload payload = new SubscriberCreationPayload() ; 		        				  
 	        		   payload.setEventId(message.getId()) ;
 	        		   payload.setEmailAddress(message.getEmailAddress()) ;
