@@ -27,3 +27,4 @@ logging:
       org.springframework: ERROR
       org.apache: ERROR
       tech.deepdreams: INFO
+      org.postgresql: ERROR
