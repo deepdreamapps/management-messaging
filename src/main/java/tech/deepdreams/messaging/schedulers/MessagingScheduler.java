@@ -18,7 +18,6 @@ public class MessagingScheduler {
     public void scheduleEmails() {
 		reminderEmailService.fetchUndeliveredEmails()
 			 .forEach(reminderEmail -> {
-				 
 				 reminderEmailService.sendReminderEmail(reminderEmail) ;
 				 log.info(String.format("Email sent %s", reminderEmail)) ;
 			 }) ; 

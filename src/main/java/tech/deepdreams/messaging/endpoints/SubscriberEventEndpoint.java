@@ -31,11 +31,13 @@ public class SubscriberEventEndpoint {
 		        	   log.info(String.format("Message received %s", message)) ;
 		        	   SubscriberCreationPayload payload = new SubscriberCreationPayload() ; 		        				  
 	        		   payload.setEventId(message.getId()) ;
+	        		   payload.setFirstName(message.getFirstName()) ;
+	        		   payload.setLastName(message.getLastName()) ;
 	        		   payload.setEmailAddress(message.getEmailAddress()) ;
 	        		   log.info(String.format("Save reminder email : %s", payload)) ;
 	        		   try {
 		        		   subscriberService.saveReminderEmail(payload) ;
-		        	   } catch (IOException e) {
+		        	   } catch (Exception e) {
 		        		   log.error(String.format("Unable to save reminder email : %s", payload), e) ;
 		        	   }
 		           }) ;
