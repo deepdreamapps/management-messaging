@@ -40,6 +40,7 @@ public class SubscriberClient {
 		List<SubscriberCreatedEvent> eventsList = new ArrayList<>() ;
 		ReceiveMessageResult result = amazonSQSClient.receiveMessage(queueSubscriberCreatedUrl) ;
 		for(Message message : result.getMessages()) {
+			log.info(String.format("Message retrieved from the queue %s", message)) ;
 			SubscriberCreatedEvent event = objectMapper.readValue(message.getBody(), SubscriberCreatedEvent.class) ;
 			eventsList.add(event) ;
 			amazonSQSClient.deleteMessage(queueSubscriberCreatedUrl, message.getReceiptHandle()) ;

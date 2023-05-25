@@ -1,4 +1,5 @@
 package tech.deepdreams.messaging.config;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,60 +23,48 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import tech.deepdreams.subscriber.events.SubscriberCreatedEvent;
 import tech.deepdreams.subscriber.events.serializers.SubscriberCreatedEventSerializer;
 
-
 @Configuration
 public class AWSConfig {
 	@Value("${aws.region}")
-    private String region ;
-	
-	
+	private String region;
+
 	@Bean
-    public AWSSecretsManager secretsManager(AWSCredentialsProvider provider) {
-        return AWSSecretsManagerClientBuilder.standard() 
-        		          .withCredentials(provider) 
-        		          .withRegion(region)
-        		          .build() ;
-    }
-	
-	
+	public AWSSecretsManager secretsManager(AWSCredentialsProvider provider) {
+		return AWSSecretsManagerClientBuilder.standard().withCredentials(provider).withRegion(region).build();
+	}
+
 	@Bean
-	public AWSCredentialsProvider credentialsProvider () {
+	public AWSCredentialsProvider credentialsProvider() {
 		return new DefaultAWSCredentialsProviderChain();
 	}
-	
-	
+
 	@Bean
-	public BasicAWSCredentials awsCredentials (AWSCredentialsProvider provider) {
+	public BasicAWSCredentials awsCredentials(AWSCredentialsProvider provider) {
 		return new BasicAWSCredentials(provider.getCredentials().getAWSAccessKeyId(),
 				provider.getCredentials().getAWSSecretKey());
 	}
-	
-	
-	
+
 	@Bean
-    public AmazonSQSClient amazonSQSClient() {
-        return (AmazonSQSClient) AmazonSQSClientBuilder.standard().build();
-    }
-    
-    
-	@Bean
-	public AmazonSimpleEmailService  amazonSESClient(BasicAWSCredentials awsCredentials) {
-		return AmazonSimpleEmailServiceClientBuilder.standard()
-	            .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
-	            .withRegion(Regions.fromName(region))
-	            .build();
+	public AmazonSQSClient amazonSQSClient() {
+		return (AmazonSQSClient) AmazonSQSClientBuilder.standard().build();
 	}
-	
-	
-	 @Primary
-	    @Bean
-	    public ObjectMapper objectMapper() {
-	    	ObjectMapper mapper = new ObjectMapper();
-	    	SimpleModule module = new SimpleModule();
-	    	module.addSerializer(SubscriberCreatedEvent.class, new SubscriberCreatedEventSerializer());
-	    	
-	    	mapper.registerModule(module);
-	    	mapper.registerModule(new JavaTimeModule()) ;
-	    	return mapper ;
-	    }
+
+	@Bean
+	public AmazonSimpleEmailService amazonSESClient(BasicAWSCredentials awsCredentials) {
+		return AmazonSimpleEmailServiceClientBuilder.standard()
+				.withCredentials(new AWSStaticCredentialsProvider(awsCredentials)).withRegion(Regions.fromName(region))
+				.build();
+	}
+
+	@Primary
+	@Bean
+	public ObjectMapper objectMapper() {
+		ObjectMapper mapper = new ObjectMapper();
+		SimpleModule module = new SimpleModule();
+		module.addSerializer(SubscriberCreatedEvent.class, new SubscriberCreatedEventSerializer());
+
+		mapper.registerModule(module);
+		mapper.registerModule(new JavaTimeModule());
+		return mapper;
+	}
 }
