@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-   <title th:remove="all" >Subscriber Creation Email Notification</title>
+   <title th:remove="all" >Subscriber Suspended Email Notification</title>
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 
 <p>Bonjour <span th:text="${firstName}" ></span>,</p>
 
-<p>Nous avons le regret de vous annoncer que votre compte d'utilisateur a été suspendu pour non paiement des frais 
-de votre abonnement. <br/> </p>
+<p>Nous vous contactons pour vous informer que votre compte a été temporairement suspendu en raison 
+du non-paiement des frais d'abonnement à notre application. Nous avons envoyé plusieurs rappels de paiement, 
+mais n'avons pas reçu de réponse adéquate de votre part.<br/> </p>
 
-<p></p> 
+<p>Veuillez noter que la suspension de votre compte entraîne la désactivation temporaire de toutes les 
+fonctionnalités associées. Cela inclut l'impossibilité d'accéder à vos données ou de les modifier.<br/> </p>
+
+<p>Pour réactiver votre compte, nous vous invitons à effectuer le paiement de vos frais d'abonnement dès 
+que possible. Vous pouvez vous connecter à votre compte et accéder à la section de paiement pour effectuer 
+la transaction. Une fois le paiement confirmé, votre compte sera réactivé automatiquement.<br/> </p>
+
+<p>Nous comprenons que des circonstances imprévues peuvent survenir, mais nous vous encourageons à régler ce 
+problème dans les plus brefs délais afin de pouvoir continuer à bénéficier de notre service sans 
+interruption.<br/> </p>
+
+<p>Si vous avez des questions ou besoin d'assistance pour effectuer le paiement, n'hésitez pas à contacter notre 
+équipe d'assistance à l'adresse support@votresociete.com. Nous sommes là pour vous aider.<br/> </p>
+
+<p>Nous vous remercions de votre compréhension et de votre coopération.<br/> </p>
+
+<p>Nous avons le regret de vous annoncer que votre compte d'utilisateur a été suspendu pour non paiement des 
+frais de votre abonnement. <br/> </p>
+
+<p>Si vous avez des questions ou besoin d'assistance pour effectuer le paiement, n'hésitez pas à contacter notre
+ équipe d'assistance à l'adresse support@deepdreams.tech. Nous sommes là pour vous aider. <br/> </p> 
 
 <p>
    Cordialement, <br/> 
