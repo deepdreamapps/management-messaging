@@ -7,4 +7,6 @@ import tech.deepdreams.messaging.models.ReminderEmail;
 public interface ReminderEmailMapper {
 	
 	public ReminderEmailDTO mapModelToDTO (ReminderEmail reminderEmail) ;
+	
+	public ReminderEmail mapDTOToModel (ReminderEmailDTO reminderEmailDTO) ;
 }

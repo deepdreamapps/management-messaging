@@ -1,12 +1,5 @@
 package tech.deepdreams.messaging.models;
 import java.time.OffsetDateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,20 +9,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "reminder_email")
-@Entity
+
 public class ReminderEmail {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reminder_email_id_seq")
+
 	private Long id ;
 	
-	@Column(name = "event_id")
 	private Long eventId ;
 	
-	@Column(name = "event_type")
 	private String eventType ;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss ")
 	private OffsetDateTime instant ;
 
 	private String subject ;

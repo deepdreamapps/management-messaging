@@ -11,7 +11,6 @@ import java.time.OffsetDateTime;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
-import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import tech.deepdreams.messaging.models.ReminderEmail;
@@ -22,7 +21,6 @@ import tech.deepdreams.messaging.requests.ReminderEmailPayload;
 @Service
 public class AmazonEmailSender {
 	private SpringTemplateEngine templateEngine ;
-    private AmazonSimpleEmailService amazonSEService ;
 	 
 	
 	public ReminderEmail genReminderEmail(ReminderEmailPayload payload) throws IOException {
@@ -54,11 +52,11 @@ public class AmazonEmailSender {
 		String subject = reminderEmail.getSubject() ;		
 		String htmlBody = reminderEmail.getContent() ;
 		
-		Properties props = System.getProperties();
-    	props.put("mail.transport.protocol", "smtp");
-    	props.put("mail.smtp.port", 587); 
-    	props.put("mail.smtp.starttls.enable", "true");
-    	props.put("mail.smtp.auth", "true");
+		Properties props = System.getProperties() ;
+    	props.put("mail.transport.protocol", "smtp") ;
+    	props.put("mail.smtp.port", 587) ; 
+    	props.put("mail.smtp.starttls.enable", "true") ;
+    	props.put("mail.smtp.auth", "true") ;
     	
     	Session session = Session.getDefaultInstance(props);
     	

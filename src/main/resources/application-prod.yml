@@ -14,7 +14,8 @@ database:
    idle-timeout: 600000
    
 ses:
-   username: smtp@deepdreams.tech
+   hostname: email-smtp.eu-west-1.amazonaws.com
+   port: 587
    secret: ses-credentials-prod
    
 
