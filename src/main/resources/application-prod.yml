@@ -21,7 +21,7 @@ subscriber:
 logging:
    logstash:
       group-name: deepdreams/${spring.application.name}
-      logstreamname: ${spring.application.name}/stream
+      logstreamname: stream/${spring.application.name}
       region: ${aws.region}
    level:
       root: INFO
