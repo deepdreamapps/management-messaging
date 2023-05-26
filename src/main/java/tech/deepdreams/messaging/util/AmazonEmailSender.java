@@ -73,11 +73,7 @@ public class AmazonEmailSender {
         
         try{
             log.info("Sending...") ;
-            
-            // Connect to Amazon SES using the SMTP username and password you specified above.
             transport.connect("email-smtp.eu-west-1.amazonaws.com", "smtp@deepdreams.tech", "AKIAV2U7KYX2DGBVVC6M,BMzphd4CSWCNYLFtqw/Rxar3MbMCEDR4aoB3ZmT3RkJu");
-        	
-            // Send the email.
             transport.sendMessage(msg, msg.getAllRecipients()) ;
             log.info("Email sent!");
         } catch (Exception ex) {
