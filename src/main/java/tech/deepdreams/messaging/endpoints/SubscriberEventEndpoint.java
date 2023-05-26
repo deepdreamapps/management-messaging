@@ -33,6 +33,7 @@ public class SubscriberEventEndpoint {
 		           .forEach(message -> {
 		        	   log.info(String.format("Message received %s", message)) ;
 		        	   SubscriberCreationPayload payload = new SubscriberCreationPayload() ;
+		        	   payload.setId(message.getSubscriberId()) ;
 	        		   payload.setFirstName(message.getFirstName()) ;
 	        		   payload.setLastName(message.getLastName()) ;
 	        		   payload.setLabel(message.getLabel()) ;

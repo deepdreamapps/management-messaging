@@ -44,10 +44,10 @@ public class SubscriberClient {
 		List<SubscriberCreatedEvent> listOfEvents = new ArrayList<>() ;
 		ReceiveMessageResult result = amazonSQSClient.receiveMessage(queueSubscriberCreatedUrl) ;
 		for(Message message : result.getMessages()) {
-			amazonSQSClient.deleteMessage(queueSubscriberCreatedUrl, message.getReceiptHandle()) ;
 			SubscriberCreatedEvent event = objectMapper.readValue(message.getBody(), SubscriberCreatedEvent.class) ;
 			listOfEvents.add(event) ;
 			log.info(String.format("Message retrieved from the queue %s", message)) ;
+			amazonSQSClient.deleteMessage(queueSubscriberCreatedUrl, message.getReceiptHandle()) ;
 		}
 		log.info(String.format("Number of messages retrieved from the queue %s", listOfEvents.size())) ;
         return listOfEvents ;
@@ -58,10 +58,10 @@ public class SubscriberClient {
 		List<SubscriberSuspendedEvent> listOfEvents = new ArrayList<>() ;
 		ReceiveMessageResult result = amazonSQSClient.receiveMessage(queueSubscriberSuspendedUrl) ;
 		for(Message message : result.getMessages()) {
-			amazonSQSClient.deleteMessage(queueSubscriberCreatedUrl, message.getReceiptHandle()) ;
 			SubscriberSuspendedEvent event = objectMapper.readValue(message.getBody(), SubscriberSuspendedEvent.class) ;
 			listOfEvents.add(event) ;
 			log.info(String.format("Message retrieved from the queue %s", message)) ;
+			amazonSQSClient.deleteMessage(queueSubscriberSuspendedUrl, message.getReceiptHandle()) ;
 		}
 		log.info(String.format("Number of messages retrieved from the queue %s", listOfEvents.size())) ;
         return listOfEvents ;
