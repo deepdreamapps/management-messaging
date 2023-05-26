@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class ReminderEmail {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reminder_email_id_seq")
 	private Long id ;
 	
 	@Column(name = "event_id")
