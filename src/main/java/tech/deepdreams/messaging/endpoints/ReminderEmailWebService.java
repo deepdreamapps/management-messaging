@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import lombok.AllArgsConstructor;
 import tech.deepdreams.messaging.dtos.ReminderEmailDTO;
+import tech.deepdreams.messaging.models.ReminderEmail;
 import tech.deepdreams.messaging.services.ReminderEmailService;
 
 
@@ -16,6 +19,12 @@ import tech.deepdreams.messaging.services.ReminderEmailService;
 @RequestMapping("/api/messaging")
 public class ReminderEmailWebService {
 	private ReminderEmailService reminderEmailService ;
+	
+	
+	@PostMapping("/create")
+	public ReminderEmailDTO saveReminderEmail(@RequestBody  ReminderEmail reminderEmail) {
+		return reminderEmailService.saveReminderEmail(reminderEmail) ;
+	}
 	
 	
 	@GetMapping("/exists/{eventType}/{eventId}")

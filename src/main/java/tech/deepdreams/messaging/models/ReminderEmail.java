@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class ReminderEmail {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id ;
 	
 	@Column(name = "event_id")

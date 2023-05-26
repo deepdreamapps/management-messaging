@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.log4j.Log4j2;
 import tech.deepdreams.messaging.dtos.ReminderEmailDTO;
@@ -24,7 +25,7 @@ import tech.deepdreams.messaging.util.AmazonEmailSender;
 import tech.deepdreams.subscriber.enums.SubscriberEventType;
 
 @Log4j2
-@Transactional
+@Transactional(isolation = Isolation.REPEATABLE_READ)
 @Service
 public class ReminderEmailService {
 	@Value("${webapp.baseUrl}")
@@ -41,6 +42,15 @@ public class ReminderEmailService {
 	
 	@Autowired
 	private ReminderEmailMapper reminderEmailMapper ;
+	
+	
+	public ReminderEmailDTO saveReminderEmail (ReminderEmail reminderEmail) {
+		ReminderEmail reminderEmailSaved = reminderEmailRepository.save(reminderEmail) ;
+		
+		log.info(String.format("Reminder email saved : %s", reminderEmailSaved)) ;
+		
+		return reminderEmailMapper.mapModelToDTO(reminderEmailSaved) ;
+	}
 	
 	
 	public ReminderEmailDTO saveReminderEmail (SubscriberCreationPayload subscriberCreationPayload) throws IOException {

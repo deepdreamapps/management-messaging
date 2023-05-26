@@ -21,3 +21,4 @@ CREATE INDEX reminder_email__event_type_event_id ON management.reminder_email (e
 
 SET TIMEZONE TO 'Africa/Douala' ;
 
+

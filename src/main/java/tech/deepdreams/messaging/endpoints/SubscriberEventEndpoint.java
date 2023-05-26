@@ -3,7 +3,6 @@ import java.time.OffsetDateTime;
 import javax.annotation.PreDestroy;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -13,7 +12,6 @@ import tech.deepdreams.messaging.services.SubscriberService;
 
 @Log4j2
 @AllArgsConstructor
-@Transactional
 @Service
 public class SubscriberEventEndpoint {
 	private SubscriberService  subscriberService ;
