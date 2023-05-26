@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS management.reminder_email
 	primary key (id)
 ) ;
 
-ALTER SEQUENCE management.reminder_email_id_seq RESTART WITH 1000000000 ;
+ALTER SEQUENCE management.reminder_email_seq RESTART WITH 1000000000 ;
 
 CREATE INDEX reminder_email__sent ON management.reminder_email (sent) ;
 CREATE INDEX reminder_email__event_type_event_id ON management.reminder_email (event_type, event_id) ;
