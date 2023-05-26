@@ -1,20 +1,12 @@
 package tech.deepdreams.messaging.config;
 import org.springframework.beans.factory.annotation.Value;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSCredentialsProvider;
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
-import com.amazonaws.regions.Regions;
 import com.amazonaws.services.secretsmanager.AWSSecretsManager;
 import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder;
-import com.amazonaws.services.secretsmanager.model.GetSecretValueRequest;
-import com.amazonaws.services.secretsmanager.model.GetSecretValueResult;
-import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
-import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder;
 import com.amazonaws.services.sqs.AmazonSQSClient;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,12 +22,7 @@ import tech.deepdreams.subscriber.events.deserializers.SubscriberSuspendedEventD
 public class AWSConfig {
 	@Value("${aws.region}")
 	private String region;
-	
-	@Value("${ses.username}")
-	private String username;
-	
-	@Value("${ses.secret}")
-	private String secretName;
+
 
 	@Bean
 	public AWSSecretsManager secretsManager(AWSCredentialsProvider provider) {
@@ -56,20 +43,6 @@ public class AWSConfig {
 	@Bean
 	public AmazonSQSClient amazonSQSClient() {
 		return (AmazonSQSClient) AmazonSQSClientBuilder.standard().build();
-	}
-
-	@Bean
-	public AmazonSimpleEmailService amazonSESClient( AWSSecretsManager secretsManager) {
-		GetSecretValueRequest request = new GetSecretValueRequest().withSecretId(secretName);
-
-		GetSecretValueResult result = secretsManager.getSecretValue(request);
-
-		String password = result.getSecretString();
-		
-		AWSCredentials sesCredentials = new BasicAWSCredentials(username, password) ;
-		return AmazonSimpleEmailServiceClientBuilder.standard()
-						.withCredentials(new AWSStaticCredentialsProvider(sesCredentials)).withRegion(Regions.fromName(region))
-						.build() ;
 	}
 
 
