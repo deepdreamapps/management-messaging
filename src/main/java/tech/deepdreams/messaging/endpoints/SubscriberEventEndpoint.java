@@ -1,7 +1,5 @@
 package tech.deepdreams.messaging.endpoints;
 import java.time.OffsetDateTime;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import javax.annotation.PreDestroy;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -20,11 +18,10 @@ import tech.deepdreams.messaging.services.SubscriberService;
 public class SubscriberEventEndpoint {
 	private SubscriberService  subscriberService ;
 	private ReminderEmailService reminderEmailService ;
-	private ExecutorService executorService ;
 	
 	@PostConstruct
 	public void init () {
-		this.executorService = Executors.newFixedThreadPool(3) ;
+		
 	}
 	
 	
@@ -52,6 +49,6 @@ public class SubscriberEventEndpoint {
 	
 	@PreDestroy
 	public void cleanUp() {
-		executorService.shutdown(); 
+		
 	}
 }
