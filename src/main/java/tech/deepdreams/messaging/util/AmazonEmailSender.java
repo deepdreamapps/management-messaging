@@ -71,7 +71,7 @@ public class AmazonEmailSender {
         msg.setSubject(subject);
         
         msg.setContent(htmlBody, "text/html") ;
-        // msg.setHeader("X-SES-CONFIGURATION-SET", "ConfigSet") ;
+        msg.setHeader("X-SES-CONFIGURATION-SET", "ConfigSet") ;
         Transport transport = session.getTransport();
         
         try{
