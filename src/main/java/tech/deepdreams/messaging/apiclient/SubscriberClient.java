@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
 import tech.deepdreams.messaging.dtos.SubscriberDTO;
 import tech.deepdreams.subscriber.events.SubscriberCreatedEvent;
+import tech.deepdreams.subscriber.events.SubscriberSuspendedEvent;
 
 
 @Log4j2
@@ -22,6 +23,9 @@ import tech.deepdreams.subscriber.events.SubscriberCreatedEvent;
 public class SubscriberClient {
 	@Value("${messaging.queue_subscriber_created_url}")
 	private String queueSubscriberCreatedUrl ;
+	
+	@Value("${messaging.queue_subscriber_suspended_url}")
+	private String queueSubscriberSuspendedUrl ;
 	
 	@Value("${subscriber.fetchSubscriberByIdUrl}")
 	private String fetchSubscriberByIdUrl ;
@@ -36,7 +40,7 @@ public class SubscriberClient {
 	private ObjectMapper objectMapper ;
 	
 
-	public List<SubscriberCreatedEvent> fetchMessagesFromQueue() throws JsonMappingException, JsonProcessingException{
+	public List<SubscriberCreatedEvent> fetchFromCreatedQueue() throws JsonMappingException, JsonProcessingException{
 		List<SubscriberCreatedEvent> listOfEvents = new ArrayList<>() ;
 		ReceiveMessageResult result = amazonSQSClient.receiveMessage(queueSubscriberCreatedUrl) ;
 		for(Message message : result.getMessages()) {
@@ -49,14 +53,28 @@ public class SubscriberClient {
         return listOfEvents ;
 	}
 	
+	
+	public List<SubscriberSuspendedEvent> fetchFromSuspendedQueue() throws JsonMappingException, JsonProcessingException{
+		List<SubscriberSuspendedEvent> listOfEvents = new ArrayList<>() ;
+		ReceiveMessageResult result = amazonSQSClient.receiveMessage(queueSubscriberSuspendedUrl) ;
+		for(Message message : result.getMessages()) {
+			amazonSQSClient.deleteMessage(queueSubscriberCreatedUrl, message.getReceiptHandle()) ;
+			SubscriberSuspendedEvent event = objectMapper.readValue(message.getBody(), SubscriberSuspendedEvent.class) ;
+			listOfEvents.add(event) ;
+			log.info(String.format("Message retrieved from the queue %s", message)) ;
+		}
+		log.info(String.format("Number of messages retrieved from the queue %s", listOfEvents.size())) ;
+        return listOfEvents ;
+	}
+	
 	 
-	public Optional<SubscriberDTO> fetchSubscriber(Long subscriberId) {
+	public SubscriberDTO fetchSubscriber(Long subscriberId) {
 		log.info(String.format("Calling Subscriber API to get subscriber with subscriberId %d", 
 				subscriberId)) ;
 		
 		SubscriberDTO subscriber = restTemplate.getForObject(fetchSubscriberByIdUrl, 
 				SubscriberDTO.class, subscriberId) ;
 		
-		return Optional.ofNullable(subscriber) ;
+		return subscriber ;
     }
 }

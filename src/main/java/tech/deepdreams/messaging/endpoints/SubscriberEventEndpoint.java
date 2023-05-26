@@ -7,7 +7,9 @@ import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import tech.deepdreams.messaging.dtos.ReminderEmailDTO;
+import tech.deepdreams.messaging.dtos.SubscriberDTO;
 import tech.deepdreams.messaging.requests.SubscriberCreationPayload;
+import tech.deepdreams.messaging.requests.SubscriberSuspensionPayload;
 import tech.deepdreams.messaging.services.ReminderEmailService;
 import tech.deepdreams.messaging.services.SubscriberService;
 
@@ -27,11 +29,10 @@ public class SubscriberEventEndpoint {
 	@Scheduled(fixedDelay = 60_000)
 	public void handleCreatedEvent () {
 		log.info(String.format("SubscriberEventEndpoint.handleCreatedEvent : Execution time %s", OffsetDateTime.now())) ;
-		subscriberService.fetchMessagesFromQueue()
+		subscriberService.fetchFromCreatedQueue()
 		           .forEach(message -> {
 		        	   log.info(String.format("Message received %s", message)) ;
 		        	   SubscriberCreationPayload payload = new SubscriberCreationPayload() ;
-	        		   payload.setEventId(message.getId()) ;
 	        		   payload.setFirstName(message.getFirstName()) ;
 	        		   payload.setLastName(message.getLastName()) ;
 	        		   payload.setLabel(message.getLabel()) ;
@@ -54,6 +55,42 @@ public class SubscriberEventEndpoint {
 		        	   }
 		           }) ;
 	}
+	
+	
+	@Scheduled(fixedDelay = 300_000)
+	public void handleSuspendedEvent () {
+		log.info(String.format("SubscriberEventEndpoint.handleSuspendedEvent : Execution time %s", OffsetDateTime.now())) ;
+		subscriberService.fetchFromSuspendedQueue()
+		           .forEach(message -> {
+		        	   log.info(String.format("Message received %s", message)) ;
+		        	   
+		        	   SubscriberDTO subscriberDTO = subscriberService.fetchSubscriber(message.getSubscriberId()) ;
+		        	   
+		        	   SubscriberSuspensionPayload payload = new SubscriberSuspensionPayload() ;
+		        	   payload.setId(subscriberDTO.getId()) ;
+	        		   payload.setFirstName(subscriberDTO.getFirstName()) ;
+	        		   payload.setLastName(subscriberDTO.getLastName()) ;
+	        		   payload.setLabel(subscriberDTO.getLabel()) ;
+	        		   payload.setEmailAddress(subscriberDTO.getEmailAddress()) ;
+	        		   log.info(String.format("Save reminder email : %s", payload)) ;
+	        		   
+	        		   ReminderEmailDTO reminderEmailDTO = null ;
+	        		   try {
+	        			   reminderEmailDTO = subscriberService.genReminderEmail(payload) ;
+		        	   } catch (Exception e) {
+		        		   log.error(String.format("Unable to generate reminder email : %s", payload), e) ;
+		        		   return ;
+		        	   }
+	        		   
+	        		   try {
+	        			   reminderEmailService.sendReminderEmail(reminderEmailDTO) ;
+		        	   } catch (Exception e) {
+		        		   log.error(String.format("Unable to send reminder email : %s", reminderEmailDTO), e) ;
+		        		   return ;
+		        	   }
+		           }) ;
+	}
+	
 	
 	
 	@PreDestroy

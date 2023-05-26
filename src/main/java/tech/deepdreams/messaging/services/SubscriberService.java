@@ -12,13 +12,16 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.log4j.Log4j2;
 import tech.deepdreams.messaging.apiclient.SubscriberClient;
 import tech.deepdreams.messaging.dtos.ReminderEmailDTO;
+import tech.deepdreams.messaging.dtos.SubscriberDTO;
 import tech.deepdreams.messaging.mappers.ReminderEmailMapper;
 import tech.deepdreams.messaging.models.ReminderEmail;
 import tech.deepdreams.messaging.requests.ReminderEmailPayload;
 import tech.deepdreams.messaging.requests.SubscriberCreationPayload;
+import tech.deepdreams.messaging.requests.SubscriberSuspensionPayload;
 import tech.deepdreams.messaging.util.AmazonEmailSender;
 import tech.deepdreams.subscriber.enums.SubscriberEventType;
 import tech.deepdreams.subscriber.events.SubscriberCreatedEvent;
+import tech.deepdreams.subscriber.events.SubscriberSuspendedEvent;
 
 @Log4j2
 @Transactional(isolation = Isolation.REPEATABLE_READ)
@@ -40,9 +43,19 @@ public class SubscriberService {
 	private ReminderEmailMapper reminderEmailMapper ;
 	
 	
-	public List<SubscriberCreatedEvent> fetchMessagesFromQueue(){
+	public List<SubscriberCreatedEvent> fetchFromCreatedQueue(){
 		try {
-			return subscriberClient.fetchMessagesFromQueue() ;
+			return subscriberClient.fetchFromCreatedQueue() ;
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			return new ArrayList<>() ;
+		} 
+	}
+	
+	
+	public List<SubscriberSuspendedEvent> fetchFromSuspendedQueue(){
+		try {
+			return subscriberClient.fetchFromSuspendedQueue() ;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			return new ArrayList<>() ;
@@ -50,17 +63,16 @@ public class SubscriberService {
 	}
 
 	
-	public ReminderEmailDTO genReminderEmail (SubscriberCreationPayload subscriberCreationPayload) throws IOException {
+	public ReminderEmailDTO genReminderEmail (SubscriberCreationPayload creationPayload) throws IOException {
 		Map<String, Object> templateModel = new HashMap<>() ;
-		templateModel.put("firstName", subscriberCreationPayload.getFirstName()) ;
-		templateModel.put("offerSelectionUrl", String.format("%s%s", baseUrl, offerSelectionUrl)) ;
+		templateModel.put("firstName", creationPayload.getFirstName()) ;
+		templateModel.put("offerSelectionUrl", String.format("%s%s/%d", baseUrl, offerSelectionUrl, creationPayload.getId())) ;
 		
 		ReminderEmailPayload reminderEmailPayload = ReminderEmailPayload.builder()
-				.eventId(subscriberCreationPayload.getEventId())
 				.eventType(SubscriberEventType.SUBSCRIBER_CREATED.name())
-				.subject("Bienvenue sur Salari")
+				.subject("Bienvenu sur Salari")
 				.from("no-reply@deepdreams.tech")
-				.to(subscriberCreationPayload.getEmailAddress())
+				.to(creationPayload.getEmailAddress())
 				.templateModel(templateModel)
 				.templateFile("subscriber/subscriberCreatedEmail.html")
 				.build() ;
@@ -70,6 +82,32 @@ public class SubscriberService {
 		log.info(String.format("Generated reminder email : %s", reminderEmail)) ;
 
 		return reminderEmailMapper.mapModelToDTO(reminderEmail) ;
+	}
+	
+	
+	public ReminderEmailDTO genReminderEmail (SubscriberSuspensionPayload suspensionPayload) throws IOException {
+		Map<String, Object> templateModel = new HashMap<>() ;
+		templateModel.put("firstName", suspensionPayload.getFirstName()) ;
+		
+		ReminderEmailPayload reminderEmailPayload = ReminderEmailPayload.builder()
+				.eventType(SubscriberEventType.SUBSCRIBER_CREATED.name())
+				.subject("Suspension de votre compte")
+				.from("no-reply@deepdreams.tech")
+				.to(suspensionPayload.getEmailAddress())
+				.templateModel(templateModel)
+				.templateFile("subscriber/subscriberSuspendedEmail.html")
+				.build() ;
+		
+		ReminderEmail reminderEmail = amazonEmailSender.genReminderEmail(reminderEmailPayload) ;
+		
+		log.info(String.format("Generated reminder email : %s", reminderEmail)) ;
+
+		return reminderEmailMapper.mapModelToDTO(reminderEmail) ;
+	}
+	
+	
+	public SubscriberDTO fetchSubscriber(Long id){
+		return subscriberClient.fetchSubscriber(id) ;
 	}
 	
 }

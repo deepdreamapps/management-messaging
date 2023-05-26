@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class SubscriberCreationPayload {
+	private Long id ;
+	
 	private String firstName ;
 	
 	private String lastName ;
@@ -16,6 +18,4 @@ public class SubscriberCreationPayload {
 	private String label ;
 	
 	private String emailAddress ;
-	
-	private Long eventId ;
 }
