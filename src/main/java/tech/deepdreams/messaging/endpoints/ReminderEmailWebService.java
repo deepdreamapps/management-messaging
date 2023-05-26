@@ -16,7 +16,7 @@ import tech.deepdreams.messaging.services.ReminderEmailService;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/messaging")
+@RequestMapping("/api/messaging/email")
 public class ReminderEmailWebService {
 	private ReminderEmailService reminderEmailService ;
 	

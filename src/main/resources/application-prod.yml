@@ -11,6 +11,12 @@ database:
    initial-size: 1
    max-size: 5
    max-lifetime: 1800000
+   idle-timeout: 600000
+   
+ses:
+   username: smtp@deepdreams.tech
+   secret: ses-credentials-prod
+   
 
 # AWS properties
 messaging:
@@ -20,7 +26,6 @@ messaging:
 logging:
    logstash:
       group-name: deepdreams/${spring.application.name}
-
       region: ${aws.region}
    level:
       root: INFO

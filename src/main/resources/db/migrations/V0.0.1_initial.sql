@@ -14,6 +14,8 @@ CREATE TABLE IF NOT EXISTS management.reminder_email
 	primary key (id)
 ) ;
 
+CREATE SEQUENCE reminder_email_id_seq START WITH 1000000000 INCREMENT BY 1 MINVALUE 1000000000 MAXVALUE 9999999999 CACHE 10 ;
+
 CREATE SEQUENCE management.reminder_email_id_seq RESTART WITH 1000000000 ;
 
 CREATE INDEX reminder_email__sent ON management.reminder_email (sent) ;
