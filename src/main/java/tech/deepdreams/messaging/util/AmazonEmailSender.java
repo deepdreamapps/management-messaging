@@ -73,7 +73,7 @@ public class AmazonEmailSender {
         
         try{
             log.info("Sending...") ;
-            transport.connect("email-smtp.eu-west-1.amazonaws.com", "smtp@deepdreams.tech", "AKIAV2U7KYX2DGBVVC6M,BMzphd4CSWCNYLFtqw/Rxar3MbMCEDR4aoB3ZmT3RkJu");
+            transport.connect("email-smtp.eu-west-1.amazonaws.com", "AKIAV2U7KYX2HSR3DMYY", "BKD0gWMhYE8Tp6v5I0g2Wa4XR4Tl9e1AOu9ppn+tCgwO");
             transport.sendMessage(msg, msg.getAllRecipients()) ;
             log.info("Email sent!");
         } catch (Exception ex) {
