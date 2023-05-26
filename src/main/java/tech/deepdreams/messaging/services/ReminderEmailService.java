@@ -64,6 +64,8 @@ public class ReminderEmailService {
 		
 		ReminderEmail reminderEmailSaved = reminderEmailRepository.save(reminderEmail) ;
 		
+		log.info(String.format("Reminder email saved : %s", reminderEmailSaved)) ;
+		
 		return reminderEmailMapper.mapModelToDTO(reminderEmailSaved) ;
 	}
 	
