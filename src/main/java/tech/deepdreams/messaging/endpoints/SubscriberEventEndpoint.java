@@ -24,7 +24,7 @@ public class SubscriberEventEndpoint {
 	}
 	
 	
-	@Scheduled(fixedDelay = 30_000)
+	@Scheduled(fixedDelay = 60_000)
 	public void handleCreatedEvent () {
 		log.info(String.format("SubscriberEventEndpoint.handleCreatedEvent : Execution time %s", OffsetDateTime.now())) ;
 		subscriberService.fetchMessagesFromQueue()
@@ -40,7 +40,7 @@ public class SubscriberEventEndpoint {
 	        		   
 	        		   ReminderEmailDTO reminderEmailDTO = null ;
 	        		   try {
-	        			   reminderEmailDTO = reminderEmailService.genReminderEmail(payload) ;
+	        			   reminderEmailDTO = subscriberService.genReminderEmail(payload) ;
 		        	   } catch (Exception e) {
 		        		   log.error(String.format("Unable to generate reminder email : %s", payload), e) ;
 		        		   return ;

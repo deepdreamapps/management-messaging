@@ -36,18 +36,14 @@ public class AmazonEmailSender {
 		return ReminderEmail.builder()
 					.eventType(payload.getEventType())
 					.eventId(payload.getEventId())
-					.instant(OffsetDateTime.now())
 					.subject(payload.getSubject())
-					.sender(payload.getFrom())
 					.recipient(payload.getTo())
 					.content(htmlBody)
-					.sent(false)
 					.build() ;
 	}
 	
 	
 	public void sendReminderEmail(ReminderEmail reminderEmail) throws IOException, MessagingException {
-		String from = reminderEmail.getSender() ;
 		String to  = reminderEmail.getRecipient() ;
 		String subject = reminderEmail.getSubject() ;		
 		String htmlBody = reminderEmail.getContent() ;
@@ -61,7 +57,7 @@ public class AmazonEmailSender {
     	Session session = Session.getDefaultInstance(props);
     	
     	MimeMessage msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress(from, to)) ;
+        msg.setFrom(new InternetAddress("no-reply@deepdreams.tech", to)) ;
         msg.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
         msg.setSubject(subject);
         

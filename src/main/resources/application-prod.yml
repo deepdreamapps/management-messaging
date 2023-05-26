@@ -18,6 +18,10 @@ ses:
    port: 587
    secret: ses-credentials-prod
    
+app:
+   base_url: https://salari.cloud
+   offer_selection_url: /subscription/select-offer
+   
 
 # AWS properties
 messaging:
