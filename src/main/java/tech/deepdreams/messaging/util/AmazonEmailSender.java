@@ -12,9 +12,6 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
-import com.amazonaws.services.simpleemail.model.Destination;
-import com.amazonaws.services.simpleemail.model.SendEmailRequest;
-import com.amazonaws.services.simpleemail.model.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import tech.deepdreams.messaging.models.ReminderEmail;
@@ -78,10 +75,10 @@ public class AmazonEmailSender {
             log.info("Sending...") ;
             
             // Connect to Amazon SES using the SMTP username and password you specified above.
-            transport.connect("email-smtp.us-west-2.amazonaws.com", "smtp@deepdreams.tech", "AKIAV2U7KYX2DGBVVC6M,BMzphd4CSWCNYLFtqw/Rxar3MbMCEDR4aoB3ZmT3RkJu");
+            transport.connect("email-smtp.eu-west-1.amazonaws.com", "smtp@deepdreams.tech", "AKIAV2U7KYX2DGBVVC6M,BMzphd4CSWCNYLFtqw/Rxar3MbMCEDR4aoB3ZmT3RkJu");
         	
             // Send the email.
-            transport.sendMessage(msg, msg.getAllRecipients());
+            transport.sendMessage(msg, msg.getAllRecipients()) ;
             log.info("Email sent!");
         } catch (Exception ex) {
         	log.error("The email was not sent.", ex);
