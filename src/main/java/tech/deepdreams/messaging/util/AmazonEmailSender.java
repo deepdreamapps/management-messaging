@@ -1,5 +1,12 @@
 package tech.deepdreams.messaging.util;
 import java.io.IOException;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.time.OffsetDateTime;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
@@ -44,24 +51,42 @@ public class AmazonEmailSender {
 	}
 	
 	
-	public void sendReminderEmail(ReminderEmail reminderEmail) throws IOException {
+	public void sendReminderEmail(ReminderEmail reminderEmail) throws IOException, MessagingException {
 		String from = reminderEmail.getSender() ;
 		String to  = reminderEmail.getRecipient() ;
 		String subject = reminderEmail.getSubject() ;		
 		String htmlBody = reminderEmail.getContent() ;
 		
-        SendEmailRequest request = new SendEmailRequest()
-            .withDestination(new Destination().withToAddresses(to))
-            .withMessage(new Message()
-                .withBody(new Body()
-                    .withHtml(new Content().withCharset("UTF-8").withData(htmlBody)))
-                .withSubject(new Content().withCharset("UTF-8").withData(subject)))
-            .withSource(from) ;
+		Properties props = System.getProperties();
+    	props.put("mail.transport.protocol", "smtp");
+    	props.put("mail.smtp.port", 587); 
+    	props.put("mail.smtp.starttls.enable", "true");
+    	props.put("mail.smtp.auth", "true");
+    	
+    	Session session = Session.getDefaultInstance(props);
+    	
+    	MimeMessage msg = new MimeMessage(session);
+        msg.setFrom(new InternetAddress(from, to)) ;
+        msg.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
+        msg.setSubject(subject);
         
-        try {
-        	amazonSEService.sendEmail(request) ;
+        msg.setContent(htmlBody, "text/html") ;
+        // msg.setHeader("X-SES-CONFIGURATION-SET", "ConfigSet") ;
+        Transport transport = session.getTransport();
+        
+        try{
+            log.info("Sending...") ;
+            
+            // Connect to Amazon SES using the SMTP username and password you specified above.
+            transport.connect("email-smtp.us-west-2.amazonaws.com", "smtp@deepdreams.tech", "AKIAV2U7KYX2DGBVVC6M,BMzphd4CSWCNYLFtqw/Rxar3MbMCEDR4aoB3ZmT3RkJu");
+        	
+            // Send the email.
+            transport.sendMessage(msg, msg.getAllRecipients());
+            log.info("Email sent!");
         } catch (Exception ex) {
-            log.error(String.format("Unable to resend email '%s' to '%s'", subject, to), ex) ;
+        	log.error("The email was not sent.", ex);
+        } finally{
+            transport.close();
         }
 	}
 	
