@@ -24,11 +24,11 @@ public class WebClientConfiguration {
 	   public RetryTemplate retryTemplate() {
 	        RetryTemplate retryTemplate = new RetryTemplate();
 
-	        RetryPolicy retryPolicy = new SimpleRetryPolicy(3); // retry up to 3 times
+	        RetryPolicy retryPolicy = new SimpleRetryPolicy(5); // retry up to 5 times
 	        retryTemplate.setRetryPolicy(retryPolicy);
 
 	        ExponentialBackOffPolicy backOffPolicy = new ExponentialBackOffPolicy();
-	        backOffPolicy.setInitialInterval(500);
+	        backOffPolicy.setInitialInterval(15000);
 	        backOffPolicy.setMultiplier(1.5);
 	        backOffPolicy.setMaxInterval(30000);
 	        retryTemplate.setBackOffPolicy(backOffPolicy);
