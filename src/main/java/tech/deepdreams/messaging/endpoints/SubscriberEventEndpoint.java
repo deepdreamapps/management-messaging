@@ -26,7 +26,7 @@ public class SubscriberEventEndpoint {
 	}
 	
 	
-	@Scheduled(fixedDelay = 60_000)
+	@Scheduled(fixedDelay = 30_000)
 	public void handleCreatedEvent () {
 		log.info(String.format("SubscriberEventEndpoint.handleCreatedEvent : Execution time %s", OffsetDateTime.now())) ;
 		subscriberService.fetchFromCreatedQueue()
