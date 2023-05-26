@@ -6,7 +6,7 @@ import javax.annotation.PreDestroy;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import tech.deepdreams.messaging.requests.SubscriberCreationPayload;
@@ -22,9 +22,8 @@ public class SubscriberEventEndpoint {
 	private ReminderEmailService reminderEmailService ;
 	private ExecutorService executorService ;
 	
-	
-	public SubscriberEventEndpoint (SubscriberService  subscriberService) {
-		this.subscriberService = subscriberService ;
+	@PostConstruct
+	public void init () {
 		this.executorService = Executors.newFixedThreadPool(3) ;
 	}
 	
