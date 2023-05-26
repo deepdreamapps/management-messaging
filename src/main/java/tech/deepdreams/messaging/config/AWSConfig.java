@@ -17,7 +17,6 @@ import tech.deepdreams.subscriber.events.SubscriberSuspendedEvent;
 import tech.deepdreams.subscriber.events.deserializers.SubscriberCreatedEventDeserializer;
 import tech.deepdreams.subscriber.events.deserializers.SubscriberSuspendedEventDeserializer;
 
-
 @Configuration
 public class AWSConfig {
 	@Value("${aws.region}")

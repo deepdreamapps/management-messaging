@@ -44,7 +44,7 @@ public class ReminderEmailService {
 				.eventId(subscriberCreationPayload.getEventId())
 				.eventType(SubscriberEventType.SUBSCRIBER_CREATED.name())
 				.subject("Bienvenue / Welcome")
-				.from("no-reply.deepdreams.tech")
+				.from("no-reply@deepdreams.tech")
 				.to(subscriberCreationPayload.getEmailAddress())
 				.templateModel(templateModel)
 				.templateFile("subscriber/subscriberCreationEmail.html")
