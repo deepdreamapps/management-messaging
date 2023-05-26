@@ -57,7 +57,7 @@ public class SubscriberEventEndpoint {
 	}
 	
 	
-	@Scheduled(fixedDelay = 300_000)
+	@Scheduled(fixedDelay = 30_000)
 	public void handleSuspendedEvent () {
 		log.info(String.format("SubscriberEventEndpoint.handleSuspendedEvent : Execution time %s", OffsetDateTime.now())) ;
 		subscriberService.fetchFromSuspendedQueue()
