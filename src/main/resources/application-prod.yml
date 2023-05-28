@@ -3,20 +3,20 @@ ses:
    hostname: email-smtp.eu-west-1.amazonaws.com
    port: 587
    secret: ses-credentials-prod
-   
+
 app:
    base_url: https://salari.cloud
    offer_selection_url: /subscription/select-offer
-   
+
 
 #  properties
 messaging:
    queue_subscriber_created_url: https://sqs.eu-west-1.amazonaws.com/400839853556/subscriber-created-messaging
    queue_subscriber_suspended_url: https://sqs.eu-west-1.amazonaws.com/400839853556/subscriber-suspended-messaging
-   
+
 subscriber:
    fetchSubscriberByIdUrl: http://192.168.2.166:8028/api/subscriber/v1/id/{id}
-   
+
 subscription:
    fetchByAppAndSubscriberUrl: http://192.168.2.166:8028/api/subscriber/v1/id/{id}
    queue_subscription_created_url: https://sqs.eu-west-1.amazonaws.com/400839853556/subscription-created-messaging
