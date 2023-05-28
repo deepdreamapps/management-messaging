@@ -1,30 +1,65 @@
 package tech.deepdreams.messaging.apiclient;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import com.amazonaws.services.sqs.AmazonSQSClient;
+import com.amazonaws.services.sqs.model.Message;
+import com.amazonaws.services.sqs.model.ReceiveMessageResult;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.extern.log4j.Log4j2;
 import tech.deepdreams.messaging.dtos.SubscriptionDTO;
+import tech.deepdreams.subscriber.events.SubscriberCreatedEvent;
+import tech.deepdreams.subscription.events.SubscriptionCreatedEvent;
 
 @Service
 @Log4j2
 public class SubscriptionClient {
+	@Value("${subscription.queue_subscription_created_url}")
+	private String queueSubscriptionCreatedUrl ;
+	
 	@Value("${subscription.fetchByAppAndSubscriberUrl}")
 	private String fetchByAppAndSubscriberUrl ;
 	
 	@Autowired
 	private RestTemplate restTemplate ;
 	
+	@Autowired
+	private AmazonSQSClient amazonSQSClient ;
+	
+	@Autowired
+	private ObjectMapper objectMapper ;
+	
+	
+	public List<SubscriptionCreatedEvent> fetchFromCreatedQueue() throws JsonMappingException, JsonProcessingException{
+		List<SubscriptionCreatedEvent> listOfEvents = new ArrayList<>() ;
+		ReceiveMessageResult result = amazonSQSClient.receiveMessage(queueSubscriptionCreatedUrl) ;
+		for(Message message : result.getMessages()) {
+			SubscriptionCreatedEvent event = objectMapper.readValue(message.getBody(), SubscriptionCreatedEvent.class) ;
+			listOfEvents.add(event) ;
+			log.info(String.format("Message retrieved from the queue %s", message)) ;
+			amazonSQSClient.deleteMessage(queueSubscriptionCreatedUrl, message.getReceiptHandle()) ;
+		}
+		log.info(String.format("Number of messages retrieved from the queue %s", listOfEvents.size())) ;
+        return listOfEvents ;
+	}
+	
 	 
 	 
-	public Optional<SubscriptionDTO> fetchSubscription(Long applicationId, Long subscriberId) {
+	public SubscriptionDTO fetchSubscription(Long applicationId, Long subscriberId) {
 		log.info(String.format("Calling Subscription API to get subscription with applicationId %d and subscriberId %d", 
 				applicationId, subscriberId)) ;
 		
-		SubscriptionDTO subscription = restTemplate.getForObject(fetchByAppAndSubscriberUrl, 
+		SubscriptionDTO subscriptionDTO = restTemplate.getForObject(fetchByAppAndSubscriberUrl, 
 				SubscriptionDTO.class, applicationId, subscriberId) ;
 		
-		return Optional.ofNullable(subscription) ;
+		return subscriptionDTO ;
     }
 }

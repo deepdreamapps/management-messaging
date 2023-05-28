@@ -16,6 +16,10 @@ messaging:
    
 subscriber:
    fetchSubscriberByIdUrl: http://192.168.2.166:8028/api/subscriber/v1/id/{id}
+   
+subscription:
+   fetchByAppAndSubscriberUrl: http://192.168.2.166:8028/api/subscriber/v1/id/{id}
+   queue_subscription_created_url: https://sqs.eu-west-1.amazonaws.com/400839853556/subscription-created-messaging
 
 # Logging
 logging:

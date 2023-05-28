@@ -14,7 +14,6 @@ import tech.deepdreams.messaging.util.AmazonEmailSender;
 @Transactional(isolation = Isolation.REPEATABLE_READ)
 @Service
 public class ReminderEmailService {
-	
 	@Autowired
 	private AmazonEmailSender amazonEmailSender ;
 	
@@ -22,9 +21,6 @@ public class ReminderEmailService {
 	private ReminderEmailMapper reminderEmailMapper ;
 	
 	
-	
-	
-
 	public void sendReminderEmail (ReminderEmailDTO reminderEmailDTO){
 		try {
 			amazonEmailSender.sendReminderEmail(reminderEmailMapper.mapDTOToModel(reminderEmailDTO)) ;
