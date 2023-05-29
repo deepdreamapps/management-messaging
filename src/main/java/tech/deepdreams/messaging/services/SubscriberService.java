@@ -9,8 +9,6 @@ import org.apache.commons.codec.binary.Base32;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.log4j.Log4j2;
 import tech.deepdreams.messaging.apiclient.SubscriberClient;
 import tech.deepdreams.messaging.dtos.ReminderEmailDTO;
@@ -26,7 +24,6 @@ import tech.deepdreams.subscriber.events.SubscriberCreatedEvent;
 import tech.deepdreams.subscriber.events.SubscriberSuspendedEvent;
 
 @Log4j2
-@Transactional(isolation = Isolation.REPEATABLE_READ)
 @Service
 public class SubscriberService {
 	@Value("${app.base_url}")
