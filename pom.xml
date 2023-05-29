@@ -20,7 +20,7 @@
 		<dependency>
 			<groupId>tech.deepdreams</groupId>
 			<artifactId>subscriber-events</artifactId>
-			<version>0.1.7-RELEASE</version>
+			<version>0.2.1-RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>tech.deepdreams</groupId>
