@@ -1,28 +1,24 @@
 package tech.deepdreams.messaging.apiclient;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 import com.amazonaws.services.sqs.AmazonSQSClient;
 import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageResult;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import lombok.extern.log4j.Log4j2;
 import tech.deepdreams.messaging.dtos.SubscriptionDTO;
-import tech.deepdreams.subscriber.events.SubscriberCreatedEvent;
 import tech.deepdreams.subscription.events.SubscriptionCreatedEvent;
 
 @Service
 @Log4j2
 public class SubscriptionClient {
-	@Value("${subscription.queue_subscription_created_url}")
+	@Value("${subscription.queueSubscriptionCreatedUrl}")
 	private String queueSubscriptionCreatedUrl ;
 	
 	@Value("${subscription.fetchByAppAndSubscriberUrl}")

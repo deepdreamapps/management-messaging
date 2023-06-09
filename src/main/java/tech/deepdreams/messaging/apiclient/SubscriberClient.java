@@ -20,10 +20,10 @@ import tech.deepdreams.subscriber.events.SubscriberSuspendedEvent;
 @Log4j2
 @Service
 public class SubscriberClient {
-	@Value("${messaging.queue_subscriber_created_url}")
+	@Value("${subscriber.queueSubscriberCreatedUrl}")
 	private String queueSubscriberCreatedUrl ;
 	
-	@Value("${messaging.queue_subscriber_suspended_url}")
+	@Value("${subscriber.queueSubscriberSuspendedUrl}")
 	private String queueSubscriberSuspendedUrl ;
 	
 	@Value("${subscriber.fetchSubscriberByIdUrl}")
