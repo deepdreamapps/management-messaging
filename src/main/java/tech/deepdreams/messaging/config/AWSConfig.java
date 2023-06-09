@@ -1,11 +1,8 @@
 package tech.deepdreams.messaging.config;
-import org.springframework.beans.factory.annotation.Value;
-
+import org.springframework.beans.factory.annotation.Value ;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.amazonaws.auth.AWSCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.services.secretsmanager.AWSSecretsManager;
 import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder;
 import com.amazonaws.services.sqs.AmazonSQSClient;
@@ -55,17 +52,6 @@ public class AWSConfig {
 	@Bean
 	public AWSSecretsManager secretsManager(AWSCredentialsProvider provider) {
 		return AWSSecretsManagerClientBuilder.standard().withCredentials(provider).withRegion(region).build();
-	}
-
-	@Bean
-	public AWSCredentialsProvider credentialsProvider() {
-		return new DefaultAWSCredentialsProviderChain();
-	}
-
-	@Bean
-	public BasicAWSCredentials awsCredentials(AWSCredentialsProvider provider) {
-		return new BasicAWSCredentials(provider.getCredentials().getAWSAccessKeyId(),
-				provider.getCredentials().getAWSSecretKey());
 	}
 
 	@Bean
