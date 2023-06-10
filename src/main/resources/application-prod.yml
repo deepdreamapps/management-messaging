@@ -4,9 +4,9 @@ ses:
    port: 587
    secret: ses-credentials-prod
 
-app:
-   base_url: https://salari.cloud
-   offer_selection_url: /subscription/select-offer
+salari:
+   baseUrl: https://salari.cloud
+   offerSelectionUrl: /subscription/select-offer
 
 
 #  properties
