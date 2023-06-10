@@ -26,10 +26,10 @@ import tech.deepdreams.subscriber.events.SubscriberSuspendedEvent;
 @Log4j2
 @Service
 public class SubscriberService {
-	@Value("${app.base_url}")
+	@Value("${salari.baseUrl}")
 	private String baseUrl;
 
-	@Value("${app.offer_selection_url}")
+	@Value("${salari.offerSelectionUrl}")
 	private String offerSelectionUrl;
 
 	@Autowired
