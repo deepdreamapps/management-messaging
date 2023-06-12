@@ -12,12 +12,12 @@ salari:
 #  properties
 
 subscriber:
-   fetchSubscriberByIdUrl: http://alb-103633703.eu-west-1.elb.amazonaws.com:8028/api/subscriber/v1/id/{id}
+   fetchSubscriberByIdUrl: http://alb-211657031.eu-west-1.elb.amazonaws.com:8028/api/subscriber/v1/id/{id}
    queueSubscriberCreatedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/subscriber-created-messaging
    queueSubscriberSuspendedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/subscriber-suspended-messaging
 
 subscription:
-   fetchByAppAndSubscriberUrl: http://alb-103633703.eu-west-1.elb.amazonaws.com:8028/api/subscriber/v1/application/{applicationId}/subscriber/{subscriberId}
+   fetchByAppAndSubscriberUrl: http://alb-211657031.eu-west-1.elb.amazonaws.com:8028/api/subscriber/v1/application/{applicationId}/subscriber/{subscriberId}
    queueSubscriptionCreatedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/subscription-created-messaging
 
 # Logging
