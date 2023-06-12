@@ -14,7 +14,8 @@ servers:
 -  url: http://services.deepdreams.tech
 
 paths:
-
+   
+                        
    /api/subscriber/v1/id/{id}:
       get:
          summary: Get subscriber by id
