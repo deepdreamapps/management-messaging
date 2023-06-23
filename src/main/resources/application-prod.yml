@@ -8,9 +8,6 @@ salari:
    baseUrl: https://salari.cloud
    offerSelectionUrl: /subscription/select-offer
 
-
-#  properties
-
 subscriber:
    fetchSubscriberByIdUrl: http://alb-1601743346.eu-west-1.elb.amazonaws.com:8028/api/subscriber/v1/id/{id}
    queueSubscriberCreatedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/subscriber-created-messaging

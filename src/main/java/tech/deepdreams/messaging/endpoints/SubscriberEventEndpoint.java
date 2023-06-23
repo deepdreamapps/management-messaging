@@ -37,7 +37,7 @@ public class SubscriberEventEndpoint {
 	        		   payload.setFirstName(message.getFirstName()) ;
 	        		   payload.setLastName(message.getLastName()) ;
 	        		   payload.setLabel(message.getLabel()) ;
-	        		   payload.setEmailAddress(message.getEmailAddress()) ;
+	        		   payload.setEmail(message.getEmailAddress()) ;
 	        		   log.info(String.format("Save reminder email : %s", payload)) ;
 	        		   
 	        		   ReminderEmailDTO reminderEmailDTO = null ;

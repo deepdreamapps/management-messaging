@@ -17,5 +17,5 @@ public class SubscriberCreationPayload {
 	
 	private String label ;
 	
-	private String emailAddress ;
+	private String email ;
 }

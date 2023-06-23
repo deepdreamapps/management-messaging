@@ -80,7 +80,7 @@ public class SubscriberService {
 
 		ReminderEmailPayload reminderEmailPayload = ReminderEmailPayload.builder()
 				.eventType(SubscriberEventType.SUBSCRIBER_CREATED.name()).subject("Bienvenu sur Salari")
-				.from("no-reply@deepdreams.tech").to(creationPayload.getEmailAddress()).templateModel(templateModel)
+				.from("no-reply@deepdreams.tech").to(creationPayload.getEmail()).templateModel(templateModel)
 				.templateFile("subscriber/subscriberCreatedEmail.html").build();
 
 		ReminderEmail reminderEmail = amazonEmailSender.genReminderEmail(reminderEmailPayload);
