@@ -38,7 +38,8 @@ public class SubscriptionClient {
 		List<SubscriptionCreatedEvent> listOfEvents = new ArrayList<>() ;
 		ReceiveMessageResult result = amazonSQSClient.receiveMessage(queueSubscriptionCreatedUrl) ;
 		for(Message message : result.getMessages()) {
-			SubscriptionCreatedEvent event = objectMapper.readValue(message.getBody(), SubscriptionCreatedEvent.class) ;
+			SNSMessage SNSMessage = objectMapper.readValue(message.getBody(), SNSMessage.class) ;
+			SubscriptionCreatedEvent event = objectMapper.readValue(SNSMessage.getMessage(), SubscriptionCreatedEvent.class) ;
 			listOfEvents.add(event) ;
 			log.info(String.format("Message retrieved from the queue %s", message)) ;
 			amazonSQSClient.deleteMessage(queueSubscriptionCreatedUrl, message.getReceiptHandle()) ;
