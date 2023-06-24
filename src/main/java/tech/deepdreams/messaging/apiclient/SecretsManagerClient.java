@@ -11,7 +11,7 @@ import lombok.extern.log4j.Log4j2;
 @Service
 @Log4j2
 public class SecretsManagerClient {
-	@Value("${identity.defaultPassword.secretname}")
+	@Value("${messaging.defaultPassword.secretname}")
 	private String secretName;
 	
 	@Autowired
