@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import tech.deepdreams.messaging.apiclient.SecretsManagerClient;
 import tech.deepdreams.messaging.apiclient.SubscriptionClient;
 import tech.deepdreams.messaging.dtos.ApplicationDTO;
 import tech.deepdreams.messaging.dtos.OfferDTO;
@@ -36,6 +37,9 @@ public class SubscriptionService {
 	@Autowired
 	private ReminderEmailMapper reminderEmailMapper;
 	
+	@Autowired
+	private SecretsManagerClient secretsManagerClient ;
+	
 	
 	public List<SubscriptionCreatedEvent> fetchFromCreatedQueue() {
 		try {
@@ -55,6 +59,8 @@ public class SubscriptionService {
 		
 		Map<String, Object> templateModel = new HashMap<>();
 		templateModel.put("firstName", subscriber.getFirstName());
+		templateModel.put("emailAddress", subscriber.getEmailAddress());
+		templateModel.put("defaultPassword", secretsManagerClient.getDefaultPassword());
 		templateModel.put("applicationLabel", application.getLabel());
 		templateModel.put("offerLabel", offer.getLabel());
 		templateModel.put("startDate", subscription.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));

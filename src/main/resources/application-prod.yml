@@ -7,6 +7,10 @@ ses:
 salari:
    baseUrl: https://salari.cloud
    offerSelectionUrl: /subscription/select-offer
+   
+messaging:
+   defaultPassword:
+      secretname: default-user-password
 
 subscriber:
    fetchSubscriberByIdUrl: http://alb-1601743346.eu-west-1.elb.amazonaws.com:8028/api/subscriber/v1/id/{id}
