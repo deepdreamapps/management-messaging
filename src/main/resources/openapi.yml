@@ -78,4 +78,6 @@ components:
                format: date-time
       Subscription:
          $ref: 'https://deepdreams-openapi.s3.eu-west-1.amazonaws.com/subscription/openapi.yml#/components/schemas/Subscription'
+      Bill:
+         $ref: 'https://deepdreams-openapi.s3.eu-west-1.amazonaws.com/billing/openapi.yml#/components/schemas/Bill'
      

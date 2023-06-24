@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   <title th:remove="all" >Billing Creation Email Notification</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<p>Cher(e) <span th:text="${firstName}" ></span>,</p>
+
+<p>Nous espérons que vous vous portez bien. Nous tenons à vous informer qu'une nouvelle facture a été générée 
+pour votre compte. Veuillez prendre quelques instants pour vous connecter à notre plateforme afin d'y accéder 
+et effectuer le paiement.</p>
+
+<p>Pour accéder à votre compte et consulter la facture :</p>   
+
+<ol>
+	<li>Rendez-vous sur l'application AdminSys à l'adresse <a href="https://adminsys.cloud" >https://adminsys.cloud</a>.</li> 
+	<li>Connectez-vous à votre compte en utilisant vos identifiants (adresse e-maii et mot de passe).</li>
+	<li>Une fois connecté(e), recherchez la section "Facturation" ou "Mes factures" dans la barre des menus.</li>
+	<li>Vous y trouverez la nouvelle facture dans la liste qui s'affiche. Celle-ci peut être téléchargée au format PDF pour une consultation facile.</li>
+</ol>
+
+<p>Nous vous encourageons à vérifier attentivement les détails de la facture, notamment la date d'échéance 
+et le montant total dû. Si vous avez des questions ou des préoccupations concernant la facture, n'hésitez pas 
+à nous contacter le support. Notre équipe se fera un plaisir de vous aider.</p> 
+     
+<p>Veuillez noter que le paiement de la facture doit être effectué avant la date d'échéance pour éviter toute 
+suspension de votre abonnement. Nous vous recommandons d'utiliser les méthodes de paiement disponibles sur 
+notre plateforme pour assurer un traitement rapide et sécurisé.</p> 
+
+<p>Nous vous remercions de votre confiance continue en nos services. Si vous avez des suggestions ou des 
+commentaires pour améliorer votre expérience client, n'hésitez pas à nous en faire part. Nous sommes là pour 
+vous accompagner.</p> 
+
+<p>
+   Cordialement, <br/> 
+   <em>L'équipe Deep Dreams</em>
+</p>
+
+</body>
+</html>
