@@ -24,6 +24,9 @@ public class SubscriptionClient {
 	@Value("${subscription.fetchByAppAndSubscriberUrl}")
 	private String fetchByAppAndSubscriberUrl ;
 	
+	@Value("${subscription.fetchSubscriptionByIdUrl}")
+	private String fetchSubscriptionByIdUrl ;
+	
 	@Autowired
 	private RestTemplate restTemplate ;
 	
@@ -54,6 +57,12 @@ public class SubscriptionClient {
 	public SubscriptionDTO fetchSubscription(Long applicationId, Long subscriberId) {
 		log.info(String.format("Calling Subscription API to get subscription with applicationId %d and subscriberId %d", applicationId, subscriberId)) ;
 		SubscriptionDTO subscriptionDTO = restTemplate.getForObject(fetchByAppAndSubscriberUrl, SubscriptionDTO.class, applicationId, subscriberId) ;
+		return subscriptionDTO ;
+    }
+	
+	public SubscriptionDTO fetchSubscription(Long subscriptionId) {
+		log.info(String.format("Calling Subscription API to get subscription with subscriptionId %d", subscriptionId)) ;
+		SubscriptionDTO subscriptionDTO = restTemplate.getForObject(fetchSubscriptionByIdUrl, SubscriptionDTO.class, subscriptionId) ;
 		return subscriptionDTO ;
     }
 }

@@ -3,7 +3,6 @@ import java.time.OffsetDateTime;
 import javax.annotation.PreDestroy;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import tech.deepdreams.messaging.dtos.ReminderEmailDTO;
@@ -18,11 +17,6 @@ import tech.deepdreams.messaging.services.SubscriberService;
 public class SubscriberEndpoint {
 	private SubscriberService  subscriberService ;
 	private ReminderEmailService reminderEmailService ;
-	
-	@PostConstruct
-	public void init () {
-		
-	}
 	
 	
 	@Scheduled(fixedDelay = 30_000)

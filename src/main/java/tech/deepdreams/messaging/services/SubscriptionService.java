@@ -96,4 +96,8 @@ public class SubscriptionService {
 	public SubscriptionDTO fetchSubscription (Long applicationId, Long subscriberId) {
 		return subscriptionClient.fetchSubscription(applicationId, subscriberId) ;
 	}
+	
+	public SubscriptionDTO fetchSubscription (Long subscriptionId) {
+		return subscriptionClient.fetchSubscription(subscriptionId) ;
+	}
 }
