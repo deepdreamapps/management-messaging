@@ -79,7 +79,7 @@ public class SubscriptionService {
 		
 		ReminderEmailPayload reminderEmailPayload = ReminderEmailPayload.builder()
 				.eventType(SubscriptionEventType.SUBSCRIPTION_CREATED.name())
-				.subject(String.format("Bienvenue sur %s", application.getLabel()))
+				.subject(String.format("Votre souscription à %s", application.getLabel()))
 				.from("no-reply@deepdreams.tech")
 				.to(subscriber.getEmailAddress())
 				.templateModel(templateModel)
