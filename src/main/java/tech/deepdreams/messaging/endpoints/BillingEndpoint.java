@@ -17,8 +17,8 @@ public class BillingEndpoint {
 	
 	
 	@Scheduled(fixedDelay = 30_000)
-	public void handleCreatedEvent () {
-		log.info(String.format("SubscriberEventEndpoint.handleCreatedEvent : Execution time %s", OffsetDateTime.now())) ;
+	public void handleCreation () {
+		log.info(String.format("BillingEndpoint.handleCreation : Execution time %s", OffsetDateTime.now())) ;
 		billService.fetchFromCreatedQueue().stream()
 				   .map(event  -> {
 					   return billService.fetchBill(event.getBillId()) ;

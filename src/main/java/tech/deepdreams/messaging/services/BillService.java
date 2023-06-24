@@ -66,25 +66,7 @@ public class BillService {
 		return reminderEmailMapper.mapModelToDTO(reminderEmail);
 	}
 
-	
-	
-	public ReminderEmailDTO genReminderEmail(SubscriberSuspensionPayload suspensionPayload) throws IOException {
-		Map<String, Object> templateModel = new HashMap<>();
-		templateModel.put("firstName", suspensionPayload.getFirstName());
 
-		ReminderEmailPayload reminderEmailPayload = ReminderEmailPayload.builder()
-				.eventType(SubscriberEventType.SUBSCRIBER_CREATED.name()).subject("Suspension de votre compte")
-				.from("no-reply@deepdreams.tech").to(suspensionPayload.getEmailAddress()).templateModel(templateModel)
-				.templateFile("subscriber/subscriberSuspendedEmail.html").build();
-
-		ReminderEmail reminderEmail = amazonEmailSender.genReminderEmail(reminderEmailPayload);
-
-		log.info(String.format("Generated reminder email : %s", reminderEmail));
-
-		return reminderEmailMapper.mapModelToDTO(reminderEmail);
-	}
-
-	
 	public BillDTO fetchBill(Long id) {
 		return billingClient.fetchBill(id) ;
 	}
