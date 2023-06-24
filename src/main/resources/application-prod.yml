@@ -4,7 +4,7 @@ ses:
    port: 587
    secret: ses-credentials-prod
 
-salari:
+adminsys:
    baseUrl: https://adminsys.cloud
    offerSelectionUrl: /subscription/select-offer
    

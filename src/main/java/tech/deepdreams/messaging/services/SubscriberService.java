@@ -16,7 +16,6 @@ import tech.deepdreams.messaging.dtos.SubscriberDTO;
 import tech.deepdreams.messaging.mappers.ReminderEmailMapper;
 import tech.deepdreams.messaging.models.ReminderEmail;
 import tech.deepdreams.messaging.requests.ReminderEmailPayload;
-import tech.deepdreams.messaging.requests.SubscriberCreationPayload;
 import tech.deepdreams.messaging.requests.SubscriberSuspensionPayload;
 import tech.deepdreams.messaging.util.AmazonEmailSender;
 import tech.deepdreams.subscriber.enums.SubscriberEventType;
@@ -26,10 +25,10 @@ import tech.deepdreams.subscriber.events.SubscriberSuspendedEvent;
 @Log4j2
 @Service
 public class SubscriberService {
-	@Value("${salari.baseUrl}")
+	@Value("${adminsys.baseUrl}")
 	private String baseUrl;
 
-	@Value("${salari.offerSelectionUrl}")
+	@Value("${adminsys.offerSelectionUrl}")
 	private String offerSelectionUrl;
 
 	@Autowired
