@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import tech.deepdreams.messaging.dtos.ReminderEmailDTO;
 import tech.deepdreams.messaging.dtos.SubscriberDTO;
-import tech.deepdreams.messaging.requests.SubscriberCreationPayload;
 import tech.deepdreams.messaging.requests.SubscriberSuspensionPayload;
 import tech.deepdreams.messaging.services.ReminderEmailService;
 import tech.deepdreams.messaging.services.SubscriberService;
@@ -16,7 +15,7 @@ import tech.deepdreams.messaging.services.SubscriberService;
 @Log4j2
 @AllArgsConstructor
 @Service
-public class SubscriberEventEndpoint {
+public class SubscriberEndpoint {
 	private SubscriberService  subscriberService ;
 	private ReminderEmailService reminderEmailService ;
 	
@@ -29,25 +28,21 @@ public class SubscriberEventEndpoint {
 	@Scheduled(fixedDelay = 30_000)
 	public void handleCreatedEvent () {
 		log.info(String.format("SubscriberEventEndpoint.handleCreatedEvent : Execution time %s", OffsetDateTime.now())) ;
-		subscriberService.fetchFromCreatedQueue()
-		           .forEach(message -> {
-		        	   log.info(String.format("Message received %s", message)) ;
-		        	   SubscriberCreationPayload payload = new SubscriberCreationPayload() ;
-		        	   payload.setId(message.getSubscriberId()) ;
-	        		   payload.setFirstName(message.getFirstName()) ;
-	        		   payload.setLastName(message.getLastName()) ;
-	        		   payload.setLabel(message.getLabel()) ;
-	        		   payload.setEmail(message.getEmailAddress()) ;
-	        		   log.info(String.format("Save reminder email : %s", payload)) ;
-	        		   
-	        		   ReminderEmailDTO reminderEmailDTO = null ;
+		subscriberService.fetchFromCreatedQueue().stream()
+				   .map(event  -> {
+					   return subscriberService.fetchSubscriber(event.getSubscriberId()) ;
+				   })
+				   .map(subscriber  -> {
+					   ReminderEmailDTO reminderEmailDTO = null ;
 	        		   try {
-	        			   reminderEmailDTO = subscriberService.genReminderEmail(payload) ;
+	        			   reminderEmailDTO = subscriberService.genReminderEmail(subscriber) ;
 		        	   } catch (Exception e) {
-		        		   log.error(String.format("Unable to generate reminder email : %s", payload), e) ;
-		        		   return ;
+		        		   log.error(String.format("Unable to generate reminder email from : %s", subscriber), e) ;
 		        	   }
-	        		   
+	        		   return reminderEmailDTO ;
+				   })
+		           .forEach(reminderEmailDTO -> {
+		   
 	        		   try {
 	        			   reminderEmailService.sendReminderEmail(reminderEmailDTO) ;
 		        	   } catch (Exception e) {

@@ -10,14 +10,14 @@ import tech.deepdreams.messaging.services.SubscriptionService;
 @Log4j2
 @AllArgsConstructor
 @Service
-public class SubscriptionEventEndpoint {
+public class SubscriptionEndpoint {
 	private SubscriptionService subscriptionService;
 
 	@Scheduled(fixedDelay = 30_000)
-	public void handleCreatedEvent() {
-		log.info(String.format("SubscriptionEventEndpoint.handleCreatedEvent : Execution time %s",
-				OffsetDateTime.now()));
-		subscriptionService.fetchFromCreatedQueue().forEach(message -> {
+	public void handleCreation() {
+		log.info(String.format("SubscriptionEndpoint.handleCreation : Execution time %s", OffsetDateTime.now()));
+		subscriptionService.fetchFromCreatedQueue()
+		.forEach(message -> {
 			log.info(String.format("Message received %s", message));
 
 		});

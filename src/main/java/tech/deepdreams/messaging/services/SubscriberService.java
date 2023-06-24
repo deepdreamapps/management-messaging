@@ -61,11 +61,11 @@ public class SubscriberService {
 		}
 	}
 
-	public ReminderEmailDTO genReminderEmail(SubscriberCreationPayload creationPayload) throws IOException {
+	public ReminderEmailDTO genReminderEmail(SubscriberDTO subscriberDTO) throws IOException {
 		Map<String, Object> templateModel = new HashMap<>();
-		templateModel.put("firstName", creationPayload.getFirstName());
+		templateModel.put("firstName", subscriberDTO.getFirstName());
 		
-		String clearId = String.format("%d", creationPayload.getId()) ;
+		String clearId = String.format("%d", subscriberDTO.getId()) ;
 
 		Base32 base32Encoder = new Base32();
 		String encodedId = base32Encoder.encodeToString(clearId.getBytes(StandardCharsets.UTF_8)) ;
@@ -79,8 +79,8 @@ public class SubscriberService {
 		// const decodedData = base32.decode(encodedData).toString('utf8'); (JavaScript)
 
 		ReminderEmailPayload reminderEmailPayload = ReminderEmailPayload.builder()
-				.eventType(SubscriberEventType.SUBSCRIBER_CREATED.name()).subject("Bienvenu sur Salari")
-				.from("no-reply@deepdreams.tech").to(creationPayload.getEmail()).templateModel(templateModel)
+				.eventType(SubscriberEventType.SUBSCRIBER_CREATED.name()).subject("Bienvenue...")
+				.from("no-reply@deepdreams.tech").to(subscriberDTO.getEmailAddress()).templateModel(templateModel)
 				.templateFile("subscriber/subscriberCreatedEmail.html").build();
 
 		ReminderEmail reminderEmail = amazonEmailSender.genReminderEmail(reminderEmailPayload);

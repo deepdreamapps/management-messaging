@@ -15,8 +15,8 @@ import lombok.extern.log4j.Log4j2;
 import tech.deepdreams.messaging.dtos.SubscriptionDTO;
 import tech.deepdreams.subscription.events.SubscriptionCreatedEvent;
 
-@Service
 @Log4j2
+@Service
 public class SubscriptionClient {
 	@Value("${subscription.queueSubscriptionCreatedUrl}")
 	private String queueSubscriptionCreatedUrl ;
@@ -44,6 +44,7 @@ public class SubscriptionClient {
 			log.info(String.format("Message retrieved from the queue %s", message)) ;
 			amazonSQSClient.deleteMessage(queueSubscriptionCreatedUrl, message.getReceiptHandle()) ;
 		}
+		
 		log.info(String.format("Number of messages retrieved from the queue %s", listOfEvents.size())) ;
         return listOfEvents ;
 	}
@@ -51,12 +52,8 @@ public class SubscriptionClient {
 	 
 	 
 	public SubscriptionDTO fetchSubscription(Long applicationId, Long subscriberId) {
-		log.info(String.format("Calling Subscription API to get subscription with applicationId %d and subscriberId %d", 
-				applicationId, subscriberId)) ;
-		
-		SubscriptionDTO subscriptionDTO = restTemplate.getForObject(fetchByAppAndSubscriberUrl, 
-				SubscriptionDTO.class, applicationId, subscriberId) ;
-		
+		log.info(String.format("Calling Subscription API to get subscription with applicationId %d and subscriberId %d", applicationId, subscriberId)) ;
+		SubscriptionDTO subscriptionDTO = restTemplate.getForObject(fetchByAppAndSubscriberUrl, SubscriptionDTO.class, applicationId, subscriberId) ;
 		return subscriptionDTO ;
     }
 }

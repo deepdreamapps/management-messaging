@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   <title th:remove="all" >Subscription Creation Email Notification</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p>
+    Cher(e) <span th:text="${firstName}" ></span>,
+</p>
+<p>
+  Nous sommes ravis de vous accueillir en tant qu'utilisateur sur, <span th:text="${applicationLabel}" ></span>, 
+  notre application de paie et de ressources humaines. Nous souhaitons vous remercier de votre récente 
+  souscription à un abonnement et nous nous engageons à vous offrir une expérience exceptionnelle tout au long 
+  de votre utilisation de notre plateforme.
+</p>
+
+<p>
+  Voici les détails de votre abonnement :
+</p>
+<ul>
+   <li>Nom de l'abonnement : <span th:text="${offerLabel}" ></span></li>
+   <li>Date de début : <span th:text="${startDate}" ></span></li>
+   <li>Durée de la période d'essai :  <span th:text="${trialDuration}" ></span> jour(s)</li>
+   <li>Fréquence de paiement :  <span th:text="${paymentFrequency}" ></span></li>
+   <li>Nombre d'utilisateurs :  <span th:text="${numberOfUsers}" ></span></li>
+   <li>Nombre d'employés :  <span th:text="${numberOfUnits}" ></span></li>
+</ul>
+
+<p>
+Votre compte a été activé avec succès, et vous pouvez dès à présent accéder à notre application en utilisant
+vos identifiants de connexion :
+</p>
+
+<ul>
+   <li>Nom d'utilisateur (votre adresse-email) : </li>
+   <li>Mot de passe (à modifier dès la première connexion) : </li>
+</ul>
+
+<p>
+Notre application de paie et de ressources humaines offre une gamme complète de fonctionnalités 
+pour vous aider à gérer efficacement les processus liés à la paie, aux ressources humaines et bien plus 
+encore. Vous pourrez facilement gérer les fiches de paie, les congés, les avantages sociaux, les heures 
+de travail, ainsi que de nombreuses autres fonctionnalités personnalisables selon les besoins de votre 
+entreprise.  
+</p>
+
+<p>
+En tant qu'utilisateur abonné, vous bénéficiez également d'un support client prioritaire. Notre équipe 
+d'assistance est là pour répondre à toutes vos questions, vous guider dans l'utilisation de notre 
+application et vous assurer une expérience exceptionnelle. 
+</p>
+
+<p>
+En tant qu'utilisateur abonné, vous bénéficiez également d'un support client prioritaire. Notre équipe 
+d'assistance est là pour répondre à toutes vos questions, vous guider dans l'utilisation de notre 
+application et vous assurer une expérience sans accroc.
+</p>
+
+<p>
+   Cordialement, <br/> 
+   <em>L'équipe Deep Dream</em>
+</p>
+
+</body>
+</html>

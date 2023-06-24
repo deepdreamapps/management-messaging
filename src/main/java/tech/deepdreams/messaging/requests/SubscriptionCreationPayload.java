@@ -1,9 +1,6 @@
 package tech.deepdreams.messaging.requests;
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
-
+import java.time.OffsetDateTime;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,8 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class SubscriptionCreationNotification {
+public class SubscriptionCreationPayload {
+	private Long id ;
+	
 	private String firstName ;
 	
 	private String lastName ;
@@ -27,7 +25,7 @@ public class SubscriptionCreationNotification {
 	private Integer numberOfYears ;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss Z")
-	private ZonedDateTime expirationDate ;
+	private OffsetDateTime expirationDate ;
 	
 	private Integer numberOfUsers ;
 	
