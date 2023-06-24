@@ -23,12 +23,12 @@ public class BillingEndpoint {
 				   .map(event  -> {
 					   return billService.fetchBill(event.getBillId()) ;
 				   })
-				   .map(subscriber  -> {
+				   .map(bill  -> {
 					   ReminderEmailDTO reminderEmailDTO = null ;
 	        		   try {
-	        			   reminderEmailDTO = billService.genReminderEmail(subscriber) ;
+	        			   reminderEmailDTO = billService.genReminderEmail(bill) ;
 		        	   } catch (Exception e) {
-		        		   log.error(String.format("Unable to generate reminder email from : %s", subscriber), e) ;
+		        		   log.error(String.format("Unable to generate reminder email from : %s", bill), e) ;
 		        	   }
 	        		   return reminderEmailDTO ;
 				   })
