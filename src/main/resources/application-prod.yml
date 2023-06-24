@@ -5,7 +5,7 @@ ses:
    secret: ses-credentials-prod
 
 salari:
-   baseUrl: https://salari.cloud
+   baseUrl: https://adminsys.cloud
    offerSelectionUrl: /subscription/select-offer
    
 messaging:
