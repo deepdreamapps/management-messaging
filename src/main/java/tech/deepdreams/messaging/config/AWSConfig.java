@@ -12,6 +12,8 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import tech.deepdreams.subscriber.events.SubscriberCreatedEvent;
 import tech.deepdreams.subscriber.events.SubscriberSuspendedEvent;
+import tech.deepdreams.billing.deserializers.BillCreatedEventDeserializer;
+import tech.deepdreams.billing.events.BillCreatedEvent;
 import tech.deepdreams.messaging.apiclient.SNSMessage;
 import tech.deepdreams.messaging.apiclient.SNSMessageDeserializer;
 import tech.deepdreams.subscription.deserializers.AdvancedSecurityDisabledEventDeserializer;
@@ -86,6 +88,9 @@ public class AWSConfig {
 		module.addDeserializer(AdvancedSecurityDisabledEvent.class, new AdvancedSecurityDisabledEventDeserializer()) ;
 		
 		module.addDeserializer(AutomaticPaymentEnabledEvent.class, new AutomaticPaymentEnabledEventDeserializer()) ;
+		
+		module.addDeserializer(BillCreatedEvent.class, new BillCreatedEventDeserializer()) ;
+		
 		module.addDeserializer(SNSMessage.class, new SNSMessageDeserializer());
 		
 		mapper.registerModule(module);
