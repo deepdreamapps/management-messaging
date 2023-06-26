@@ -77,6 +77,7 @@ public class BillingService {
 			default :
 				yield "" ;
 		} ;
+		
 		templateModel.put("invoiceObject", invoiceObject) ;
 		templateModel.put("amount", bill.getAmountWithTaxes()) ;
 		templateModel.put("dueDate", bill.getPaymentDelay().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))) ;
@@ -93,7 +94,7 @@ public class BillingService {
 
 		log.info(String.format("Generated reminder email : %s", reminderEmail));
 
-		return reminderEmailMapper.mapModelToDTO(reminderEmail);
+		return reminderEmailMapper.mapModelToDTO(reminderEmail) ;
 	}
 
 	

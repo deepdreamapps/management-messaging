@@ -15,6 +15,7 @@ messaging:
 billing:
    fetchBillByIdUrl: http://alb-1601743346.eu-west-1.elb.amazonaws.com:8026/api/billing/v1/id/{id}
    queueBillCreatedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/bill-created-messaging
+   queueBillExpiredUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/bill-expired-messaging
 
 subscriber:
    fetchSubscriberByIdUrl: http://alb-1601743346.eu-west-1.elb.amazonaws.com:8028/api/subscriber/v1/id/{id}
