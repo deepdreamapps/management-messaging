@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import lombok.extern.log4j.Log4j2;
 import tech.deepdreams.billing.enums.BillEventType;
 import tech.deepdreams.billing.events.BillCreatedEvent;
+import tech.deepdreams.billing.events.BillExpiredEvent;
 import tech.deepdreams.messaging.apiclient.BillingClient;
 import tech.deepdreams.messaging.dtos.ApplicationDTO;
 import tech.deepdreams.messaging.dtos.BillDTO;
@@ -45,9 +46,9 @@ public class BillingService {
 	}
 	
 	
-	public List<BillCreatedEvent> fetchFromExpiredQueue() {
+	public List<BillExpiredEvent> fetchFromExpiredQueue() {
 		try {
-			return billingClient.fetchFromCreatedQueue();
+			return billingClient.fetchFromExpiredQueue();
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			return new ArrayList<>();
