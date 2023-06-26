@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   <title th:remove="all" >Billing Creation Email Notification</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<p>Cher(e) <span th:text="${firstName}" ></span>,</p>
+
+<p>Nous tenions à vous informer que la date d'échéance pour le paiement de votre dernière facture d'abonnement
+à <span th:text="${applicationLabel}" ></span> est arrivée à expiration. Il est essentiel de régler votre 
+paiement afin de continuer à profiter de tous les avantages offerts par notre service.</p>
+
+<p>Nous comprenons qu'il peut y avoir des circonstances imprévues et que des oublis peuvent se produire. 
+Cependant, nous souhaitons vous rappeler que le paiement en temps voulu est nécessaire pour maintenir votre 
+abonnement actif.</p>   
+
+<p>Pour régler votre facture et éviter toute interruption de service, veuillez effectuer le paiement dès que 
+possible. Voici les détails de votre facture :</p> 
+
+<ul>
+	<li>Numéro : <span th:text="${number}" ></span></li> 
+	<li>Objet de la facture : <span th:text="${invoiceObject}" ></span></li> 
+	<li>Montant dû : <span th:text="${amount}" ></span></li> 
+	<li>Date d'échéance : <span th:text="${dueDate}" ></span></li>
+</ul>
+
+<p>Voici les différentes options de paiement disponibles :</p>   
+
+<ol>
+	<li>Paiement en ligne : Connectez-vous à votre compte sur notre site web et accédez à la section 
+	"Facturation" ou "Paiement". Suivez les instructions pour effectuer le paiement en utilisant une carte 
+	de crédit ou un mode de paiement enregistré..</li> 
+	<li>Virement bancaire : Effectuez un virement bancaire en utilisant les coordonnées bancaires suivantes :
+	.</li>
+	<li>Autres méthodes de paiement : Si vous préférez utiliser une autre méthode de paiement ou si vous avez 
+	des questions spécifiques, veuillez nous contacter directement à [adresse e-mail du support] ou en répondant 
+	à ce message. Notre équipe d'assistance se fera un plaisir de vous aider..</li>
+</ol>
+
+<p>Nous vous encourageons à vérifier attentivement les détails de la facture, notamment la date d'échéance 
+et le montant total dû. Si vous avez des questions ou des préoccupations concernant la facture, n'hésitez pas 
+à nous contacter le support. Notre équipe se fera un plaisir de vous aider.</p> 
+     
+<p>Veuillez noter que le paiement de la facture doit être effectué avant la date d'échéance pour éviter toute 
+suspension de votre abonnement. Nous vous recommandons d'utiliser les méthodes de paiement disponibles sur 
+notre plateforme pour assurer un traitement rapide et sécurisé.</p> 
+
+<p>Nous vous remercions de votre confiance continue en nos services. Si vous avez des suggestions ou des 
+commentaires pour améliorer votre expérience client, n'hésitez pas à nous en faire part. Nous sommes là pour 
+vous accompagner.</p> 
+
+<p>
+   Cordialement, <br/> 
+   <em>L'équipe Deep Dreams</em>
+</p>
+
+</body>
+</html>

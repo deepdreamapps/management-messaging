@@ -12,6 +12,15 @@
 pour votre compte. Veuillez prendre quelques instants pour vous connecter à notre plateforme afin d'y accéder 
 et effectuer le paiement.</p>
 
+<p>Voici les détails de votre nouvelle facture :</p> 
+
+<ul>
+	<li>ID de la facture : <span th:text="${billId}" ></span></li> 
+	<li>Objet de la facture : <span th:text="${invoiceObject}" ></span></li> 
+	<li>Montant dû : <span th:text="${amount}" ></span> USD</li> 
+	<li>Date d'échéance : <span th:text="${dueDate}" ></span></li>
+</ul>
+
 <p>Pour accéder à votre compte et consulter la facture :</p>   
 
 <ol>
