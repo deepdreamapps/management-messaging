@@ -1,5 +1,4 @@
 package tech.deepdreams.messaging.endpoints;
-
 import java.time.OffsetDateTime;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -28,14 +27,68 @@ public class SubscriptionEndpoint {
 		   .map(subscription  -> {
 			   ReminderEmailDTO reminderEmailDTO = null ;
 			   try {
-				   reminderEmailDTO = subscriptionService.genReminderEmail(subscription) ;
+				   reminderEmailDTO = subscriptionService.genSubscriptionCreatedReminderEmail(subscription) ;
 			   } catch (Exception e) {
 				   log.error(String.format("Unable to generate reminder email from : %s", subscription), e) ;
 			   }
 			   return reminderEmailDTO ;
 		   })
 		   .forEach(reminderEmailDTO -> {
-
+			   try {
+				   reminderEmailService.sendReminderEmail(reminderEmailDTO) ;
+			   } catch (Exception e) {
+				   log.error(String.format("Unable to send reminder email : %s", reminderEmailDTO), e) ;
+				   return ;
+			   }
+        }) ;
+	}
+	
+	
+	
+	@Scheduled(fixedDelay = 30_000)
+	public void handleActivation() {
+		log.info(String.format("SubscriptionEndpoint.handleActivation : Execution time %s", OffsetDateTime.now()));
+		subscriptionService.fetchFromActivatedQueue().stream()
+		   .map(event  -> {
+			   return subscriptionService.fetchSubscription(event.getSubscriptionId()) ;
+		   })
+		   .map(subscription  -> {
+			   ReminderEmailDTO reminderEmailDTO = null ;
+			   try {
+				   reminderEmailDTO = subscriptionService.genSubscriptionActivatedReminderEmail(subscription) ;
+			   } catch (Exception e) {
+				   log.error(String.format("Unable to generate reminder email from : %s", subscription), e) ;
+			   }
+			   return reminderEmailDTO ;
+		   })
+		   .forEach(reminderEmailDTO -> {
+			   try {
+				   reminderEmailService.sendReminderEmail(reminderEmailDTO) ;
+			   } catch (Exception e) {
+				   log.error(String.format("Unable to send reminder email : %s", reminderEmailDTO), e) ;
+				   return ;
+			   }
+        }) ;
+	}
+	
+	
+	@Scheduled(fixedDelay = 30_000)
+	public void handleSuspension() {
+		log.info(String.format("SubscriptionEndpoint.handleSuspension : Execution time %s", OffsetDateTime.now()));
+		subscriptionService.fetchFromSuspendedQueue().stream()
+		   .map(event  -> {
+			   return subscriptionService.fetchSubscription(event.getSubscriptionId()) ;
+		   })
+		   .map(subscription  -> {
+			   ReminderEmailDTO reminderEmailDTO = null ;
+			   try {
+				   reminderEmailDTO = subscriptionService.genSubscriptionSuspendedReminderEmail(subscription) ;
+			   } catch (Exception e) {
+				   log.error(String.format("Unable to generate reminder email from : %s", subscription), e) ;
+			   }
+			   return reminderEmailDTO ;
+		   })
+		   .forEach(reminderEmailDTO -> {
 			   try {
 				   reminderEmailService.sendReminderEmail(reminderEmailDTO) ;
 			   } catch (Exception e) {

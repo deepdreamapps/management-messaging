@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   <title th:remove="all" >Subscription Suspension Email Notification</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p>
+    Cher(e) <span th:text="${firstName}" ></span>,
+</p>
+<p>
+  Nous espérons que vous vous portez bien. Nous vous écrivons pour vous informer qu'il y a eu une suspension de votre 
+  abonnement à notre application de paie et de ressources humaines <span th:text="${applicationLabel}" ></span>.
+</p>
+
+<p>
+  Cette suspension peut être due au non-paiement de votre facture d'abonnement. Nous n'avons pas reçu le paiement pour 
+  votre abonnement dans les délais prévus. Veuillez vérifier votre mode de paiement et vous assurer que le règlement est effectué.
+</p>
+
+<p>
+Nous vous encourageons à prendre contact avec notre équipe d'assistance clientèle dès que possible pour discuter de cette suspension 
+et trouver une solution appropriée. Notre équipe se tient à votre disposition pour répondre à toutes vos questions et vous aider à 
+résoudre ce problème.
+</p>
+
+<p>
+Nous apprécions votre soutien continu envers notre application de paie et de ressources humaines. Votre satisfaction est notre priorité, 
+et nous ferons tout notre possible pour résoudre cette situation rapidement.
+</p>
+
+<p>
+   Cordialement, <br/> 
+   <em>L'équipe Deep Dream</em>
+</p>
+
+</body>
+</html>

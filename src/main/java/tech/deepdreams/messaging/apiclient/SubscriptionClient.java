@@ -13,13 +13,21 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
 import tech.deepdreams.messaging.dtos.SubscriptionDTO;
+import tech.deepdreams.subscription.events.SubscriptionActivatedEvent;
 import tech.deepdreams.subscription.events.SubscriptionCreatedEvent;
+import tech.deepdreams.subscription.events.SubscriptionSuspendedEvent;
 
 @Log4j2
 @Service
 public class SubscriptionClient {
 	@Value("${subscription.queueSubscriptionCreatedUrl}")
 	private String queueSubscriptionCreatedUrl ;
+	
+	@Value("${subscription.queueSubscriptionActivatedUrl}")
+	private String queueSubscriptionActivatedUrl ;
+	
+	@Value("${subscription.queueSubscriptionSuspendedUrl}")
+	private String queueSubscriptionSuspendedUrl ;
 	
 	@Value("${subscription.fetchByAppAndSubscriberUrl}")
 	private String fetchByAppAndSubscriberUrl ;
@@ -46,6 +54,39 @@ public class SubscriptionClient {
 			listOfEvents.add(event) ;
 			log.info(String.format("Message retrieved from the queue %s", message)) ;
 			amazonSQSClient.deleteMessage(queueSubscriptionCreatedUrl, message.getReceiptHandle()) ;
+		}
+		
+		log.info(String.format("Number of messages retrieved from the queue %s", listOfEvents.size())) ;
+        return listOfEvents ;
+	}
+	
+	
+	
+	public List<SubscriptionActivatedEvent> fetchFromActivatedQueue() throws JsonMappingException, JsonProcessingException{
+		List<SubscriptionActivatedEvent> listOfEvents = new ArrayList<>() ;
+		ReceiveMessageResult result = amazonSQSClient.receiveMessage(queueSubscriptionActivatedUrl) ;
+		for(Message message : result.getMessages()) {
+			SNSMessage SNSMessage = objectMapper.readValue(message.getBody(), SNSMessage.class) ;
+			SubscriptionActivatedEvent event = objectMapper.readValue(SNSMessage.getMessage(), SubscriptionActivatedEvent.class) ;
+			listOfEvents.add(event) ;
+			log.info(String.format("Message retrieved from the queue %s", message)) ;
+			amazonSQSClient.deleteMessage(queueSubscriptionActivatedUrl, message.getReceiptHandle()) ;
+		}
+		
+		log.info(String.format("Number of messages retrieved from the queue %s", listOfEvents.size())) ;
+        return listOfEvents ;
+	}
+	
+	
+	public List<SubscriptionSuspendedEvent> fetchFromSuspendedQueue() throws JsonMappingException, JsonProcessingException{
+		List<SubscriptionSuspendedEvent> listOfEvents = new ArrayList<>() ;
+		ReceiveMessageResult result = amazonSQSClient.receiveMessage(queueSubscriptionSuspendedUrl) ;
+		for(Message message : result.getMessages()) {
+			SNSMessage SNSMessage = objectMapper.readValue(message.getBody(), SNSMessage.class) ;
+			SubscriptionSuspendedEvent event = objectMapper.readValue(SNSMessage.getMessage(), SubscriptionSuspendedEvent.class) ;
+			listOfEvents.add(event) ;
+			log.info(String.format("Message retrieved from the queue %s", message)) ;
+			amazonSQSClient.deleteMessage(queueSubscriptionSuspendedUrl, message.getReceiptHandle()) ;
 		}
 		
 		log.info(String.format("Number of messages retrieved from the queue %s", listOfEvents.size())) ;

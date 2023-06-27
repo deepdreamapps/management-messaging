@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   <title th:remove="all" >Subscription Activation Email Notification</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p>
+    Cher(e) <span th:text="${firstName}" ></span>,
+</p>
+<p>
+  Nous espérons que vous vous portez bien. Nous tenons à vous informer que votre abonnement à notre application de paie et de ressources 
+  humaines <span th:text="${applicationLabel}" ></span> a été activé avec succès.
+</p>
+
+<p>
+  Nous avons reçu le paiement de votre facture, et nous vous remercions de votre règlement. Votre abonnement est maintenant actif, 
+  ce qui signifie que vous pouvez profiter pleinement de toutes les fonctionnalités et avantages offerts par notre application.
+</p>
+
+<p>
+  Voici quelques rappels importants concernant votre abonnement :
+</p>
+
+<ul>
+   <li>Accès complet : Vous avez désormais un accès complet à toutes les fonctionnalités de l'application de paie et de ressources humaines. 
+   	   N'hésitez pas à explorer toutes les options disponibles pour optimiser votre expérience.</li>
+   <li>Assistance dédiée : Notre équipe d'assistance clientèle est à votre disposition pour répondre à toutes vos questions, vous guider dans 
+       l'utilisation de l'application et vous aider en cas de besoin. N'hésitez pas à nous contacter si vous avez besoin d'une assistance 
+       supplémentaire.</li>
+   <li>Mises à jour régulières : Nous nous efforçons d'améliorer constamment notre application en ajoutant de nouvelles fonctionnalités et en 
+   	   apportant des améliorations. Vous recevrez des mises à jour régulières pour vous tenir informé(e) des nouveautés.</li>
+</ul>
+
+<p>
+	Nous sommes ravis de vous compter parmi nos abonnés, et nous sommes convaincus que notre application vous aidera à gérer efficacement vos 
+	processus de paie et de ressources humaines.
+</p>
+
+<p>
+   Cordialement, <br/> 
+   <em>L'équipe Deep Dream</em>
+</p>
+
+</body>
+</html>

@@ -22,7 +22,9 @@ import tech.deepdreams.messaging.models.ReminderEmail;
 import tech.deepdreams.messaging.requests.ReminderEmailPayload;
 import tech.deepdreams.messaging.util.AmazonEmailSender;
 import tech.deepdreams.subscription.enums.SubscriptionEventType;
+import tech.deepdreams.subscription.events.SubscriptionActivatedEvent;
 import tech.deepdreams.subscription.events.SubscriptionCreatedEvent;
+import tech.deepdreams.subscription.events.SubscriptionSuspendedEvent;
 
 @Log4j2
 @AllArgsConstructor
@@ -51,7 +53,27 @@ public class SubscriptionService {
 	}
 	
 	
-	public ReminderEmailDTO genReminderEmail(SubscriptionDTO subscription) throws IOException {
+	public List<SubscriptionActivatedEvent> fetchFromActivatedQueue() {
+		try {
+			return subscriptionClient.fetchFromActivatedQueue();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			return new ArrayList<>();
+		}
+	}
+	
+	
+	public List<SubscriptionSuspendedEvent> fetchFromSuspendedQueue() {
+		try {
+			return subscriptionClient.fetchFromSuspendedQueue();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			return new ArrayList<>();
+		}
+	}
+	
+	
+	public ReminderEmailDTO genSubscriptionCreatedReminderEmail(SubscriptionDTO subscription) throws IOException {
 		SubscriberDTO subscriber = subscription.getSubscriber() ;
 		ApplicationDTO application = subscription.getApplication() ;
 		OfferDTO offer = subscription.getOffer() ;
@@ -82,6 +104,60 @@ public class SubscriptionService {
 		templateModel.put("paymentFrequency", paymentFrequency);
 		
 		String templateFile = String.format("subscription/%d/subscriptionCreationEmail.html", application.getId()) ;
+		
+		ReminderEmailPayload reminderEmailPayload = ReminderEmailPayload.builder()
+				.eventType(SubscriptionEventType.SUBSCRIPTION_CREATED.name())
+				.subject(String.format("Votre abonnement à %s", application.getLabel()))
+				.from("no-reply@deepdreams.tech")
+				.to(subscriber.getEmailAddress())
+				.templateModel(templateModel)
+				.templateFile(templateFile).build();
+
+		ReminderEmail reminderEmail = amazonEmailSender.genReminderEmail(reminderEmailPayload);
+
+		log.info(String.format("Generated reminder email : %s", reminderEmail));
+
+		return reminderEmailMapper.mapModelToDTO(reminderEmail);
+	}
+	
+	
+	public ReminderEmailDTO genSubscriptionActivatedReminderEmail(SubscriptionDTO subscription) throws IOException {
+		SubscriberDTO subscriber = subscription.getSubscriber() ;
+		ApplicationDTO application = subscription.getApplication() ;
+		
+		Map<String, Object> templateModel = new HashMap<>();
+		templateModel.put("firstName", subscriber.getFirstName());
+		templateModel.put("emailAddress", subscriber.getEmailAddress());
+		templateModel.put("applicationLabel", application.getLabel());
+		
+		String templateFile = String.format("subscription/%d/subscriptionActivationEmail.html", application.getId()) ;
+		
+		ReminderEmailPayload reminderEmailPayload = ReminderEmailPayload.builder()
+				.eventType(SubscriptionEventType.SUBSCRIPTION_ACTIVATED.name())
+				.subject(String.format("Activation de l'abonnement à %s", application.getLabel()))
+				.from("no-reply@deepdreams.tech")
+				.to(subscriber.getEmailAddress())
+				.templateModel(templateModel)
+				.templateFile(templateFile).build();
+
+		ReminderEmail reminderEmail = amazonEmailSender.genReminderEmail(reminderEmailPayload);
+
+		log.info(String.format("Generated reminder email : %s", reminderEmail));
+
+		return reminderEmailMapper.mapModelToDTO(reminderEmail);
+	}
+	
+	
+	public ReminderEmailDTO genSubscriptionSuspendedReminderEmail(SubscriptionDTO subscription) throws IOException {
+		SubscriberDTO subscriber = subscription.getSubscriber() ;
+		ApplicationDTO application = subscription.getApplication() ;
+		
+		Map<String, Object> templateModel = new HashMap<>();
+		templateModel.put("firstName", subscriber.getFirstName());
+		templateModel.put("emailAddress", subscriber.getEmailAddress());
+		templateModel.put("applicationLabel", application.getLabel());
+
+		String templateFile = String.format("subscription/%d/subscriptionSuspensionEmail.html", application.getId()) ;
 		
 		ReminderEmailPayload reminderEmailPayload = ReminderEmailPayload.builder()
 				.eventType(SubscriptionEventType.SUBSCRIPTION_CREATED.name())
