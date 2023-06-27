@@ -26,7 +26,9 @@ subscription:
    fetchSubscriptionByIdUrl: http://alb-1601743346.eu-west-1.elb.amazonaws.com:8024/api/subscription/v1/id/{id}
    fetchByAppAndSubscriberUrl: http://alb-1601743346.eu-west-1.elb.amazonaws.com:8028/api/subscriber/v1/application/{applicationId}/subscriber/{subscriberId}
    queueSubscriptionCreatedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/subscription-created-messaging
-
+   queueSubscriptionActivatedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/subscription-activated-messaging
+   queueSubscriptionSuspendedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/subscription-suspended-messaging
+   
 # Logging
 logging:
    logstash:
