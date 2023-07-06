@@ -34,8 +34,6 @@ public class AmazonEmailSender {
 		final String htmlBody = templateEngine.process(payload.getTemplateFile(), context) ;
 		
 		return ReminderEmail.builder()
-					.eventType(payload.getEventType())
-					.eventId(payload.getEventId())
 					.subject(payload.getSubject())
 					.recipient(payload.getTo())
 					.content(htmlBody)

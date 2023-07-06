@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ReminderEmail {
+public class ReminderSms {
 
 	private Long id ;
-	
+
 	private String sender ;
 
 	private String subject ;

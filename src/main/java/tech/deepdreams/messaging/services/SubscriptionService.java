@@ -21,7 +21,6 @@ import tech.deepdreams.messaging.mappers.ReminderEmailMapper;
 import tech.deepdreams.messaging.models.ReminderEmail;
 import tech.deepdreams.messaging.requests.ReminderEmailPayload;
 import tech.deepdreams.messaging.util.AmazonEmailSender;
-import tech.deepdreams.subscription.enums.SubscriptionEventType;
 import tech.deepdreams.subscription.events.SubscriptionActivatedEvent;
 import tech.deepdreams.subscription.events.SubscriptionCreatedEvent;
 import tech.deepdreams.subscription.events.SubscriptionSuspendedEvent;
@@ -106,7 +105,6 @@ public class SubscriptionService {
 		String templateFile = String.format("subscription/%d/subscriptionCreationEmail.html", application.getId()) ;
 		
 		ReminderEmailPayload reminderEmailPayload = ReminderEmailPayload.builder()
-				.eventType(SubscriptionEventType.SUBSCRIPTION_CREATED.name())
 				.subject(String.format("Votre abonnement à %s", application.getLabel()))
 				.from("no-reply@deepdreams.tech")
 				.to(subscriber.getEmailAddress())
@@ -133,7 +131,6 @@ public class SubscriptionService {
 		String templateFile = String.format("subscription/%d/subscriptionActivationEmail.html", application.getId()) ;
 		
 		ReminderEmailPayload reminderEmailPayload = ReminderEmailPayload.builder()
-				.eventType(SubscriptionEventType.SUBSCRIPTION_ACTIVATED.name())
 				.subject(String.format("Activation de l'abonnement à %s", application.getLabel()))
 				.from("no-reply@deepdreams.tech")
 				.to(subscriber.getEmailAddress())
@@ -160,7 +157,6 @@ public class SubscriptionService {
 		String templateFile = String.format("subscription/%d/subscriptionSuspensionEmail.html", application.getId()) ;
 		
 		ReminderEmailPayload reminderEmailPayload = ReminderEmailPayload.builder()
-				.eventType(SubscriptionEventType.SUBSCRIPTION_CREATED.name())
 				.subject(String.format("Votre abonnement à %s", application.getLabel()))
 				.from("no-reply@deepdreams.tech")
 				.to(subscriber.getEmailAddress())

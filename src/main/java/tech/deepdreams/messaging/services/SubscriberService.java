@@ -18,7 +18,6 @@ import tech.deepdreams.messaging.models.ReminderEmail;
 import tech.deepdreams.messaging.requests.ReminderEmailPayload;
 import tech.deepdreams.messaging.requests.SubscriberSuspensionPayload;
 import tech.deepdreams.messaging.util.AmazonEmailSender;
-import tech.deepdreams.subscriber.enums.SubscriberEventType;
 import tech.deepdreams.subscriber.events.SubscriberCreatedEvent;
 import tech.deepdreams.subscriber.events.SubscriberSuspendedEvent;
 
@@ -78,8 +77,10 @@ public class SubscriberService {
 		// const decodedData = base32.decode(encodedData).toString('utf8'); (JavaScript)
 
 		ReminderEmailPayload reminderEmailPayload = ReminderEmailPayload.builder()
-				.eventType(SubscriberEventType.SUBSCRIBER_CREATED.name()).subject("Bienvenue...")
-				.from("no-reply@deepdreams.tech").to(subscriberDTO.getEmailAddress()).templateModel(templateModel)
+				.subject("Bienvenue...")
+				.from("no-reply@deepdreams.tech")
+				.to(subscriberDTO.getEmailAddress())
+				.templateModel(templateModel)
 				.templateFile("subscriber/subscriberCreatedEmail.html").build();
 
 		ReminderEmail reminderEmail = amazonEmailSender.genReminderEmail(reminderEmailPayload);
@@ -96,8 +97,10 @@ public class SubscriberService {
 		templateModel.put("firstName", suspensionPayload.getFirstName());
 
 		ReminderEmailPayload reminderEmailPayload = ReminderEmailPayload.builder()
-				.eventType(SubscriberEventType.SUBSCRIBER_CREATED.name()).subject("Suspension de votre compte")
-				.from("no-reply@deepdreams.tech").to(suspensionPayload.getEmailAddress()).templateModel(templateModel)
+				.subject("Suspension de votre compte")
+				.from("no-reply@deepdreams.tech")
+				.to(suspensionPayload.getEmailAddress())
+				.templateModel(templateModel)
 				.templateFile("subscriber/subscriberSuspendedEmail.html").build();
 
 		ReminderEmail reminderEmail = amazonEmailSender.genReminderEmail(reminderEmailPayload);

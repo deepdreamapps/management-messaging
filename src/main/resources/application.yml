@@ -1,7 +1,6 @@
 server:
    port: 8022
 
-# Spring Boot
 spring:
    application:
       name: messaging
@@ -21,12 +20,11 @@ spring:
       protocol: smtp
       test-connection: false
 
-# Amazon Web Services
+
 aws:
    region: eu-west-1
 
 
-#Application
 webapp:
    baseUrl: https://deepdreams.tech
    offerSelectionUrl: /subscriber/

@@ -8,7 +8,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import lombok.extern.log4j.Log4j2;
-import tech.deepdreams.billing.enums.BillEventType;
 import tech.deepdreams.billing.events.BillCreatedEvent;
 import tech.deepdreams.billing.events.BillExpiredEvent;
 import tech.deepdreams.messaging.apiclient.BillingClient;
@@ -84,7 +83,6 @@ public class BillingService {
 		templateModel.put("dueDate", bill.getPaymentDelay().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))) ;
 		
 		ReminderEmailPayload reminderEmailPayload = ReminderEmailPayload.builder()
-				.eventType(BillEventType.BILL_CREATED.name())
 				.subject("Nouvelle facture disponible")
 				.from("no-reply@deepdreams.tech").to(subscriber.getEmailAddress())
 				.templateModel(templateModel)
@@ -126,7 +124,6 @@ public class BillingService {
 		templateModel.put("dueDate", bill.getPaymentDelay().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))) ;
 		
 		ReminderEmailPayload reminderEmailPayload = ReminderEmailPayload.builder()
-				.eventType(BillEventType.BILL_EXPIRED.name())
 				.subject(String.format("Échéance de paiement dépassée pour votre abonnement à %s", application.getLabel()))
 				.from("no-reply@deepdreams.tech")
 				.to(subscriber.getEmailAddress())

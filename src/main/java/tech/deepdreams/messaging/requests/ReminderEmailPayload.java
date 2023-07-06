@@ -10,9 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ReminderEmailPayload {
-	private String eventType ;
-	
-	private Long eventId ;
 	
 	private String from ;
 	

@@ -1,5 +1,4 @@
-# SES properties
-ses:
+simpleEmail:
    hostname: email-smtp.eu-west-1.amazonaws.com
    port: 587
    secret: ses-credentials-prod
@@ -29,7 +28,6 @@ subscription:
    queueSubscriptionActivatedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/subscription-activated-messaging
    queueSubscriptionSuspendedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/subscription-suspended-messaging
    
-# Logging
 logging:
    logstash:
       group-name: deepdreams/${spring.application.name}

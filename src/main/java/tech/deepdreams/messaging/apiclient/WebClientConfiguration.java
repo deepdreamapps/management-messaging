@@ -17,7 +17,7 @@ public class WebClientConfiguration {
 	   public RestTemplate restTemplate(RetryTemplate retryTemplate) {
 	        return new RestTemplateBuilder()
 	                		.setConnectTimeout(Duration.ofSeconds(10))
-	                		.setReadTimeout(Duration.ofSeconds(10))
+	                		.setReadTimeout(Duration.ofSeconds(15))
 	                		.build();
 	   }
 
@@ -36,7 +36,5 @@ public class WebClientConfiguration {
 
 	        return retryTemplate;
 	   }
-	  
-	  
 
 }
