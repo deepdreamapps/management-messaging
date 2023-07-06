@@ -12,21 +12,21 @@ messaging:
       secretname: default-user-password
       
 billing:
-   fetchBillByIdUrl: http://alb-1601743346.eu-west-1.elb.amazonaws.com:8026/api/billing/v1/id/{id}
-   queueBillCreatedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/bill-created-messaging
-   queueBillExpiredUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/bill-expired-messaging
+   fetchBillByIdUrl: http://alb-1015667293.eu-west-1.elb.amazonaws.com:8026/api/billing/v1/id/{id}
+   queueBillCreatedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/bill-created-messaging.fiffo
+   queueBillExpiredUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/bill-expired-messaging.fiffo
 
 subscriber:
-   fetchSubscriberByIdUrl: http://alb-1601743346.eu-west-1.elb.amazonaws.com:8028/api/subscriber/v1/id/{id}
-   queueSubscriberCreatedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/subscriber-created-messaging
-   queueSubscriberSuspendedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/subscriber-suspended-messaging
+   fetchSubscriberByIdUrl: http://alb-1015667293.eu-west-1.elb.amazonaws.com:8028/api/subscriber/v1/id/{id}
+   queueSubscriberCreatedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/subscriber-created-messaging.fiffo
+   queueSubscriberSuspendedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/subscriber-suspended-messaging.fiffo
 
 subscription:
-   fetchSubscriptionByIdUrl: http://alb-1601743346.eu-west-1.elb.amazonaws.com:8024/api/subscription/v1/id/{id}
-   fetchByAppAndSubscriberUrl: http://alb-1601743346.eu-west-1.elb.amazonaws.com:8028/api/subscriber/v1/application/{applicationId}/subscriber/{subscriberId}
-   queueSubscriptionCreatedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/subscription-created-messaging
-   queueSubscriptionActivatedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/subscription-activated-messaging
-   queueSubscriptionSuspendedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/subscription-suspended-messaging
+   fetchSubscriptionByIdUrl: http://alb-1015667293.eu-west-1.elb.amazonaws.com:8024/api/subscription/v1/id/{id}
+   fetchByAppAndSubscriberUrl: http://alb-1015667293.eu-west-1.elb.amazonaws.com:8028/api/subscriber/v1/application/{applicationId}/subscriber/{subscriberId}
+   queueSubscriptionCreatedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/subscription-created-messaging.fiffo
+   queueSubscriptionActivatedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/subscription-activated-messaging.fiffo
+   queueSubscriptionSuspendedUrl: https://sqs.eu-west-1.amazonaws.com/400839853556/subscription-suspended-messaging.fiffo
    
 logging:
    logstash:

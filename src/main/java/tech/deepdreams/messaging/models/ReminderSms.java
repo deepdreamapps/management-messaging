@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ReminderSms {
 
-	private Long id ;
+	private Long countryId ;
 
 	private String sender ;
 

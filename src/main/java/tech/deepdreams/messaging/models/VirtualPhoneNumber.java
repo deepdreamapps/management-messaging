@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "phone_number")
-public class PhoneNumber {
+@Table(name = "virtual_phone_number")
+public class VirtualPhoneNumber {
 	@Id
 	private Long id ;
 	
@@ -19,6 +19,19 @@ public class PhoneNumber {
 	private Long countryId ;
 	
 	@NotBlank
-	private String number ;
+	@Column(name = "country_number")
+	private String countryNumber ;
+	
+	@NotBlank
+	@Column(name = "twilio_number")
+	private String twilioNumber ;
+	
+	@NotBlank
+	@Column(name = "account_sid")
+	private String accountSid ;
+	
+	@NotBlank
+	@Column(name = "auth_token")
+	private String authToken ;
 
 }

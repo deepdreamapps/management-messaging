@@ -10,7 +10,7 @@ import com.twilio.Twilio;
 public class ManagementMessagingApplication {
 
 	public static void main(String[] args) {
-		Twilio.init("", "");
+		//Twilio.init("", "");
 		SpringApplication.run(ManagementMessagingApplication.class, args);
 	}
 
